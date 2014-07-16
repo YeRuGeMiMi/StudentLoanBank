@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<!-- 设置开发模式的开启 -->
+<constant name="struts.devMode" value="true" />
+<!-- 申明登入Action包 -->
+<package name="defaultPackage" namespace="/user" extends="struts-default">
+	<!--登入验证-->
+	<action name="login" class="lyh.web.user.LoginAction">
+		<result name="In">
+			/jsp/user/login.jsp
+		</result>
+		<result name="sucess">
+			/jsp/index/index.jsp
+		</result>
+	</action>
+	<action name="reg" class="lyh.web.user.RegAction">
+		<result name="In">
+			/jsp/user/reg.jsp
+		</result>
+		<result name="sucess">
+			/jsp/user/login.jsp
+		</result>
+	</action>
+	
+</package>
+</struts>    

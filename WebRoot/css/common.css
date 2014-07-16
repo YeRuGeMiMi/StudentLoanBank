@@ -1,0 +1,46 @@
+.ltext{
+	font-size: 18px;
+	font-style: normal;
+	color:white;
+
+}
+
+.login{
+	width:300px; height:170px;
+	background-color:#2359b0;	
+	position:absolute;
+	left: 500px;
+	top:360px;
+	border-radius:5px;
+}
+
+.login #nei{
+	position:relative;
+	top:20px;
+	left: 10px;
+}
+
+.submit{
+	position:relative;
+	left: 60px;
+}
+
+.logo { 
+	background-image:url(../img/logo.jpg);  
+	background-repeat:no-repeat; 
+	background-position: 430px center; 
+	height:150px;
+
+}
+.foot { 
+	 position:absolute;
+	 bottom: 50px;
+	 color: white;
+	 left: 550px;
+	 }
+
+.touxiang {
+	position:absolute;
+	left: 560px;
+	top:215px;
+}
