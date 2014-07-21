@@ -55,7 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <option value="0">--请选择类型--</option>
                             <option value="1">学生账户</option>
                             <option value="2">学校账户</option>
-                            <option value="3">管理员账户</option>
+                            <option value="3">银行账户</option>
+                            <option value="4">管理员账户</option>
                         </select>
                     </td>
                 </tr>
