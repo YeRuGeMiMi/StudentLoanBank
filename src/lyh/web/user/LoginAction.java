@@ -6,6 +6,11 @@ import lyh.base.BaseAction;
 import lyh.po.user.Member;
 import lyh.services.user.UserServices;
 
+/**
+ * 登入
+ * @author lyh
+ *
+ */
 public class LoginAction extends BaseAction {
 	
 	//用户名

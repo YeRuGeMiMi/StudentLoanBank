@@ -4,14 +4,15 @@
 <!-- 设置开发模式的开启 -->
 <constant name="struts.devMode" value="true" />
 <!-- 申明登入Action包 -->
-<package name="defaultPackage" namespace="/user" extends="struts-default">
+<package name="defaultPackage" namespace="/User" extends="struts-default">
 	<!--登入验证-->
 	<action name="login" class="lyh.web.user.LoginAction">
 		<result name="In">
 			/jsp/user/login.jsp
 		</result>
-		<result name="sucess">
-			/jsp/index/index.jsp
+		<result name="sucess" type="redirectAction">
+			<param name="namespace">/Index</param>
+			<param name="actionName">index</param>
 		</result>
 	</action>
 	<action name="reg" class="lyh.web.user.RegAction">
@@ -22,6 +23,13 @@
 			/jsp/user/login.jsp
 		</result>
 	</action>
-	
+</package>
+
+<package name="indexPackage" namespace="/Index" extends="struts-default">
+	<action name="index" class="lyh.web.index.IndexAction">
+		<result name="In">
+			/jsp/index/index.jsp
+		</result>
+	</action>
 </package>
 </struts>    

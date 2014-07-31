@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -28,10 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body style="background-image: url(${root}/img/login_bg.jpg)">
 	<div class="logo"></div>
-	<div class="touxiang"><img src="${root}/img/touxiang.png" class="img-rounded" width="150px"></div>
+	<div class="touxiang"><img src="${root}/img/touxiang.png" class="img-rounded" width="150px">
+	</div>
    <div class="login">
    	<div id="nei">
-   <form class="bs-example bs-example-form" role="form" action="user/login" method="POST">
+   <form class="bs-example bs-example-form" role="form" action="User/login" method="POST">
       <div class="input-group">
          <span class="ltext">用户名:</span>
          <input type="text" class="form-control" placeholder="请输入用户名" name="username">
@@ -55,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 	<script type="text/javascript">
 		function zc(){
-			window.location="user/reg";
+			window.location="User/reg";
 		}
 	</script>
 </body>

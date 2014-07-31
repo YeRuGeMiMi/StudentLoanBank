@@ -22,6 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <c:redirect url="/user/login"  />
+    <c:redirect url="/User/login"  />
   </body>
 </html>

@@ -10,6 +10,11 @@ import util.RegexTools;
 import lyh.base.BaseAction;
 import lyh.services.user.UserServices;
 
+/**
+ * 注册
+ * @author lyh
+ *
+ */
 public class RegAction extends BaseAction{
 	private String username;
 	private String password;

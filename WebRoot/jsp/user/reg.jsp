@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body style="background-image: url(${root}/img/login_bg.jpg)">
     <div class="main">
-    	<form action="user/reg" method="POST" >
+    	<form action="User/reg" method="POST" >
     		<h3>账户信息</h3>
             <hr>
             <table  height="100%" border="0" cellspacing="0" cellpadding="0" class="regtable">
