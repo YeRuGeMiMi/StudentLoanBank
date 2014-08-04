@@ -186,27 +186,27 @@ public class RegAction extends BaseAction{
 		String method = ServletActionContext.getRequest().getMethod();
 		if(method.equals("POST")){
 			if(!RegexTools.regUserName(username)){
-				super.request.setAttribute("message", "用户名格式有误！");
+				super.request.put("message", "用户名格式有误！");
 				return "In";
 			}
 			
 			if(!password.equals(repassword)){
-				super.request.setAttribute("message", "两次输入的密码不一致！");
+				super.request.put("message", "两次输入的密码不一致！");
 				return "In";
 			}
 			
 			if(!RegexTools.regUserName(password)){
-				super.request.setAttribute("message", "用户名格式有误！");
+				super.request.put("message", "用户名格式有误！");
 				return "In";
 			}
 			
 			if(!RegexTools.regSelfCode(selfcode)){
-				super.request.setAttribute("message", "身份证号格式有误！");
+				super.request.put("message", "身份证号格式有误！");
 				return "In";
 			}
 			
 			if(!RegexTools.regEmail(email)){
-				super.request.setAttribute("message", "邮箱格式有误！");
+				super.request.put("message", "邮箱格式有误！");
 				return "In";
 			}
 			

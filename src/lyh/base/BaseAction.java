@@ -22,13 +22,7 @@ public class BaseAction extends ActionSupport{
 	/**
 	 * request
 	 */
-	protected HttpServletRequest request;
+	protected Map<String,Object> request = (Map<String, Object>) ActionContext.getContext().get("request") ;
 	
-	/**
-	 * 注入request
-	 * @param request
-	 */
-	public void setServletRequest(HttpServletRequest request){
-	      this.request = request;
-    }
+	
 }

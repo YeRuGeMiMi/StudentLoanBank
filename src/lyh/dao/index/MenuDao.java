@@ -18,21 +18,16 @@ public class MenuDao extends BaseDao{
 	}
 	
 	/**
-	 * 取得所有的Menu结构
+	 * 取得一个菜单的子菜单
 	 */
-	public List getMenus(){
+	public List getMenus(int plid){
 		//取得所有root菜单
 		String getroot = "from Menu as m where m.plid=:plid";
 		Query rootquery = super.session.createQuery(getroot);
-		rootquery.setInteger("plid", 0);
+		rootquery.setInteger("plid", plid);
 		List<Menu> roots = rootquery.list();
 		return roots;
 	}
 	
-	/**
-	 * 取得一个菜单的子菜单
-	 */
-	public List getChildMeuns(){
-		return null;
-	}
+	
 }

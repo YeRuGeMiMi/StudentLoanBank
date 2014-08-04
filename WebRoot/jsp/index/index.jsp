@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="keywords" content="">
 <link href="${root}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${root}/css/common.css" rel="stylesheet"></link>
-<script src="${root}/js/jquery.min.js"></script>
+<script src="${root}/js/jquery-1.7.2.min.js"></script>
 <script src="${root}/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
   .divcss5{border:1px solid #F00}
@@ -45,6 +45,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     height: 100%;
     border: 0px;
   }
+  .list ul{
+  	list-style-type:none;
+  }
+  .list ul li{
+  	text-align: center;
+  }
 </style>
 </head>
 <body style="background-image: url(${root}/img/login_bg.jpg)">
@@ -55,13 +61,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <span style="position: relative;top:25px;left:500px;"><a href="">退出</a></span>
   </div>
   <div id="left">
-    <ul>
-      <li><a href="" target="view_main">贷款管理</a></li>
-      <li><a href="" target="view_main">学生管理</a></li>
-      <li><a href="" target="view_main">学校管理</a></li>
-      <li><a href="" target="view_main">银行管理</a></li>
-      <li><a href="" target="view_main">系统管理</a></li>
-    </ul>
+    <div class="btn-group-vertical">
+    <c:set var="menus" value="${requestScope.menus}"></c:set>
+    	<c:forEach var="vo" items="${menus[\"0\"]}">
+    		<button type="button" lass="btn btn-default" style="width: 150px;" onclick="jh(${vo.path})">${vo.title}</button>
+    		<c:if test="${vo.has_submenu==1}">
+    		<div id="${vo.path}" class="list">
+    		<c:set var="plid" value="${vo.title}"></c:set>
+	        <ul>
+	        <c:forEach var="vo1" items="${menus[plid]}">
+	        
+	          <li><a href="${vo1.path}">${vo1.title}</a></li>
+	         </c:forEach>
+	        </ul>
+        	</div>
+        	</c:if>
+    	</c:forEach>
+    	
+   </div>
   </div>
   <div id="right" >
     <iframe src="" class="main" name="view_main">
@@ -71,5 +88,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div style="position: fixed;bottom: 0;width:100%;text-align: center;">
     <p style="color:white;">专业学生贷款&nbsp;@&nbsp;给你一个更好的明天</p>
 </div>
+<script type="text/javascript">
+	window.onload = function(){
+		$("div[id$='_list']").css("display","none");
+	}
+	
+	function jh(vlist){
+    	var t = $(vlist);
+    	if(t.css("display") == "none"){
+    		t.css("display","block");
+    	}else{
+    		t.css("display","none");
+    	}
+	}
+</script>
 </body>
 </html>
