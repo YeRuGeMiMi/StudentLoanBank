@@ -4,7 +4,31 @@
 <!-- 设置开发模式的开启 -->
 <constant name="struts.devMode" value="true" />
 <!-- 申明登入Action包 -->
-<package name="defaultPackage" namespace="/User" extends="struts-default">
+<package name="defaultPackage" extends="struts-default" >
+	<!-- 全局拦截器 -->
+	<interceptors>
+		<!-- 定义拦截器栈 -->
+		<interceptor-stack name="defStack">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 自定义拦截器添加到拦截器栈中 -->
+			<interceptor-ref name="sessionNull"></interceptor-ref>
+		</interceptor-stack>
+		<!-- 自定义拦截器 -->
+		<interceptor name="sessionNull" class="lyh.base.SessionNullInterceptor"></interceptor>
+	</interceptors>
+	<!-- 调用拦截器 -->
+	<default-interceptor-ref name="defStack" />
+	
+	<!-- 定义全局结果集 -->
+	<global-results>
+		<result name="sessionnull" type="redirectAction">
+			<param name="namespace">/User</param>
+			<param name="actionName">login</param>
+		</result>
+	</global-results>
+</package>
+
+<package name="userPackage" namespace="/User" extends="defaultPackage">
 	<!--登入验证-->
 	<action name="login" class="lyh.web.user.LoginAction">
 		<result name="In">
@@ -13,6 +37,9 @@
 		<result name="sucess" type="redirectAction">
 			<param name="namespace">/Index</param>
 			<param name="actionName">index</param>
+		</result>
+		<result name="fail">
+			/jsp/user/login.jsp
 		</result>
 	</action>
 	<action name="reg" class="lyh.web.user.RegAction">
@@ -23,9 +50,15 @@
 			/jsp/user/login.jsp
 		</result>
 	</action>
+	<action name="quit" class="lyh.web.user.QuitAction">
+		<result name="sucess" type="redirectAction">
+			<param name="namespace">/User</param>
+			<param name="actionName">login</param>
+		</result>
+	</action>
 </package>
 
-<package name="indexPackage" namespace="/Index" extends="struts-default">
+<package name="indexPackage" namespace="/Index" extends="defaultPackage">
 	<action name="index" class="lyh.web.index.IndexAction">
 		<result name="In">
 			/jsp/index/index.jsp

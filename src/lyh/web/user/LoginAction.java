@@ -1,6 +1,7 @@
 package lyh.web.user;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.ParentPackage;
 
 import lyh.base.BaseAction;
 import lyh.po.user.Member;
@@ -41,6 +42,8 @@ public class LoginAction extends BaseAction {
 				Member member= services.getById(s);
 				super.session.put("member",member );
 				return "sucess";
+			}else{
+				return "fail";
 			}
 		}
 		

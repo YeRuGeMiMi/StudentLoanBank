@@ -47,6 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   }
   .list ul{
   	list-style-type:none;
+  	margin-left:0px;
   }
   .list ul li{
   	text-align: center;
@@ -58,20 +59,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <img src="${root}/img/logo.png" style="width:250px;"/>
     <span style="color: white;position: relative;top:25px;">欢迎<span style="color:red;">${sessionScope.member.username }</span>登录！今天是${sessionScope.today }</span>
 
-    <span style="position: relative;top:25px;left:500px;"><a href="">退出</a></span>
+    <span style="position: relative;top:25px;left:500px;"><a href="../User/quit" class="btn btn-danger">退出</a></span>
   </div>
   <div id="left">
     <div class="btn-group-vertical">
     <c:set var="menus" value="${requestScope.menus}"></c:set>
     	<c:forEach var="vo" items="${menus[\"0\"]}">
-    		<button type="button" lass="btn btn-default" style="width: 150px;" onclick="jh(${vo.path})">${vo.title}</button>
+<button type="button" class="btn btn-primary" style="width: 150px;" onclick="jh(${vo.path})">${vo.title}</button>    		
     		<c:if test="${vo.has_submenu==1}">
     		<div id="${vo.path}" class="list">
     		<c:set var="plid" value="${vo.title}"></c:set>
 	        <ul>
 	        <c:forEach var="vo1" items="${menus[plid]}">
 	        
-	          <li><a href="${vo1.path}">${vo1.title}</a></li>
+	          <li><a href="${root}${vo1.path}">${vo1.title}</a><i class="icon-hand-left"></i></li>
 	         </c:forEach>
 	        </ul>
         	</div>
