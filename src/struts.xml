@@ -65,4 +65,12 @@
 		</result>
 	</action>
 </package>
+
+<package name="studentPackage" namespace="/Student" extends="defaultPackage">
+	<action name="info" class="lyh.web.studnet.InfoAction">
+		<result name="In">
+			/jsp/student/info.jsp
+		</result>
+	</action>
+</package>
 </struts>    

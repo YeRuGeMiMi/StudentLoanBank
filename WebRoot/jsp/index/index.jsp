@@ -72,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <ul>
 	        <c:forEach var="vo1" items="${menus[plid]}">
 	        
-	          <li><a href="${root}${vo1.path}">${vo1.title}</a><i class="icon-hand-left"></i></li>
+	          <li><a href="${root}${vo1.path}" target="view_main">${vo1.title}</a><i class="icon-hand-left"></i></li>
 	         </c:forEach>
 	        </ul>
         	</div>
