@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body style="background-image: url(${root}/img/login_bg.jpg)">
     <div class="main">
-    	<form action="User/reg" method="POST" >
+    	<form action="Reg/reg" method="POST" >
     		<h3>账户信息</h3>
             <hr>
             <table  height="100%" border="0" cellspacing="0" cellpadding="0" class="regtable">
@@ -60,40 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </select>
                     </td>
                 </tr>
-            </table>
-            <h3>个人信息</h3>
-            <hr>
-            <table  height="100%" border="0" cellspacing="0" cellpadding="0" class="regtable">
-                <tr>
-                    <td align="right"><label class="control-label">真实姓名：</label></td>
-                    <td><input type="text" placeholder="请输入你的姓名" name="name"></td>
-                </tr>
-                <tr>
-                    <td align="right"><label class="control-label">身份证号：</label></td>
-                    <td><input type="text" placeholder="请输入你的身份证号" name="selfcode"></td>
-                </tr>
-                <tr>
-                    <td align="right"><label class="control-label">家庭住址：</label></td>
-                    <td><input type="text" placeholder="请输入你的地址" name="address"></td>
-                </tr>
-                <tr>
-                    <td align="right"><label class="control-label">所在学校：</label></td>
-                    <td><input type="text" placeholder="请输入你的学校" name="school"></td>
-                </tr>
-                <tr>
-                    <td align="right"><label class="control-label">所属院系：</label></td>
-                    <td><input type="text" placeholder="请输入你的院系" name="collage"></td>
-                </tr>
-                <tr>
-                    <td align="right"><label class="control-label">学制：</label></td>
-                    <td><select name="years">
-                        <option >--请选择学制--</option>
-                        <option value="2">2年制</option>
-                        <option value="3">3年制</option>
-                        <option value="4">4年制</option>
-                        <option value="5">5年制</option>
-                    </select></td>
-                </tr>
                 <tr>
                     <td align="right"><input type="submit" class="btn btn-large btn-primary" value="去注册"></td>
                     <td><input type="button" class="btn btn-large" value="不注册" onclick="back()"></td>
@@ -105,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 	<script type="text/javascript">
 		function back(){
-			history.back();
+			window.location="User/login";
 		}
 	</script>
 </html>

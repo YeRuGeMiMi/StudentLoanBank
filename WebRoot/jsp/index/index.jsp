@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     left:25px;
     background-color: #fadede;
     border-radius:5px;
+    height:500px;
   }
   #right{
     width: 960px;
@@ -38,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     top: 85px;
     background-color: #fadede;
     border-radius:5px;
+    height:650px;
   }
 
   .main{
@@ -69,10 +71,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<c:if test="${vo.has_submenu==1}">
     		<div id="${vo.path}" class="list">
     		<c:set var="plid" value="${vo.title}"></c:set>
-	        <ul>
+	        <ul class="nav nav-tabs nav-stacked">
 	        <c:forEach var="vo1" items="${menus[plid]}">
 	        
-	          <li><a href="${root}${vo1.path}" target="view_main">${vo1.title}</a><i class="icon-hand-left"></i></li>
+	          <li><a href="${root}${vo1.path}" target="view_main">${vo1.title}</a></li>
 	         </c:forEach>
 	        </ul>
         	</div>
@@ -86,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
     </iframe>
   </div>
-<div style="position: fixed;bottom: 0;width:100%;text-align: center;">
+<div style="position: relative;top:660px;width:100%;text-align: center;">
     <p style="color:white;">专业学生贷款&nbsp;@&nbsp;给你一个更好的明天</p>
 </div>
 <script type="text/javascript">

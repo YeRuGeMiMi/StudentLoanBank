@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 	<script type="text/javascript">
 		function zc(){
-			window.location="User/reg";
+			window.location="Reg/reg";
 		}
 	</script>
 </body>

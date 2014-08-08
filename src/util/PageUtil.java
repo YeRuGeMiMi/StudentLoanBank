@@ -52,6 +52,11 @@ public class PageUtil {
 		return buf.toString();
 	}
 	
+	/**
+	 * 参数的url形式（"&dhgks=12&..."）
+	 * @param keys
+	 * @return 拼接好的参数url
+	 */
 	private String createParamUrl(Map<String,Object> keys){
 		StringBuffer buf = new StringBuffer();
 		

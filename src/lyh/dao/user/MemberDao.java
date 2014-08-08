@@ -78,5 +78,6 @@ public class MemberDao extends BaseDao {
 		
 		return member;
 	}
+	
 }
 

@@ -42,20 +42,7 @@ public class UserServices  extends BaseServices{
 		MemberDao dao = new MemberDao();
 		int i= dao.saveMember(member);
 		if(i>0){
-			MemberInfo info = new MemberInfo();
-			info.setMember(member);
-			info.setName(keys.get("name"));
-			info.setSelfcode(keys.get("selfcode"));
-			info.setAddress(keys.get("address"));
-			info.setSchool(keys.get("school"));
-			info.setCollage(keys.get("collage"));
-			info.setYears(Integer.parseInt(keys.get("years")));
-			
-			MemberInfoDao infoDao = new MemberInfoDao();
-			int s = infoDao.saveMemberInfo(info);
-			if(s>0){
-				return true;
-			}
+			return true;
 		}
 		
 		return false;

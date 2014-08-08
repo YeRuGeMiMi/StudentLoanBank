@@ -21,12 +21,7 @@ public class RegAction extends BaseAction{
 	private String repassword;
 	private String email;
 	private String type;
-	private String name;
-	private String selfcode;
-	private String address;
-	private String school;
-	private String collage;
-	private String years;
+	
 	
 	
 	public String getUsername() {
@@ -94,93 +89,6 @@ public class RegAction extends BaseAction{
 		this.type = type;
 	}
 
-
-
-
-	public String getName() {
-		return name;
-	}
-
-
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-
-	public String getSelfcode() {
-		return selfcode;
-	}
-
-
-
-
-	public void setSelfcode(String selfcode) {
-		this.selfcode = selfcode;
-	}
-
-
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-
-
-	public String getSchool() {
-		return school;
-	}
-
-
-
-
-	public void setSchool(String school) {
-		this.school = school;
-	}
-
-
-
-
-	public String getCollage() {
-		return collage;
-	}
-
-
-
-
-	public void setCollage(String collage) {
-		this.collage = collage;
-	}
-
-
-
-
-	public String getYears() {
-		return years;
-	}
-
-
-
-
-	public void setYears(String years) {
-		this.years = years;
-	}
-
-
-
-
 	@Override
 	public String execute() throws Exception {
 		String method = ServletActionContext.getRequest().getMethod();
@@ -200,10 +108,7 @@ public class RegAction extends BaseAction{
 				return "In";
 			}
 			
-			if(!RegexTools.regSelfCode(selfcode)){
-				super.request.put("message", "身份证号格式有误！");
-				return "In";
-			}
+			
 			
 			if(!RegexTools.regEmail(email)){
 				super.request.put("message", "邮箱格式有误！");
@@ -215,12 +120,7 @@ public class RegAction extends BaseAction{
 			keys.put("password",password);
 			keys.put("email", email);
 			keys.put("type", type);
-			keys.put("name", name);
-			keys.put("selfcode", selfcode);
-			keys.put("address", address);
-			keys.put("collage", collage);
-			keys.put("school", school);
-			keys.put("years", years);
+			
 			
 			UserServices ser = new UserServices();
 			boolean bool = ser.regSave(keys);

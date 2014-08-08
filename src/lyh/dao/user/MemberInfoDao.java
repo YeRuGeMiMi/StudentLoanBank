@@ -1,6 +1,9 @@
 package lyh.dao.user;
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 
 import util.HibernateSessionFactory;
 
@@ -27,6 +30,15 @@ public class MemberInfoDao extends BaseDao{
 		}
 		
 		return i;
+	}
+	
+	public List<MemberInfo> getByType(int type){
+		String hql = "from MemberInfo as i where i.member.type=:type";
+		Query query = super.session.createQuery(hql);
+		query.setInteger("type", type);
+		List<MemberInfo> list = query.list();
+		
+		return list;
 	}
 }
 
