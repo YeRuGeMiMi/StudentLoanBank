@@ -26,6 +26,7 @@
 			<mapping resource="lyh/po/user/Member.hbm.xml" />
 			<mapping resource="lyh/po/user/MemberInfo.hbm.xml" />
 			<mapping resource="lyh/po/index/Menu.hbm.xml"/>
+			<mapping resource="lyh/po/school/School.hbm.xml"/>
 	</session-factory>
 
 </hibernate-configuration>

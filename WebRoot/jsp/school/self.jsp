@@ -32,32 +32,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 	<div class="self_main">
-		<form action="" method="">
+		<form action="School/self" method="POST">
 			
 			<table>
 				<tr>
 					<td align="right"><label class="control-label">校名：</label></td>
-					<td><input type="text" placeholder="请输入校名"></td>
+					<td><input type="text" placeholder="请输入校名" name="name" value="${requestScope.school.name}"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">学校代码：</label></td>
-					<td><input type="text" placeholder="请输入学校代码"></td>
+					<td><input type="text" placeholder="请输入学校代码" name="scode" value="${requestScope.school.scode}"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">对外邮箱：</label></td>
-					<td><input type="text" placeholder="请输入对外邮箱"></td>
+					<td><input type="text" placeholder="请输入对外邮箱" name="email" value="${requestScope.school.email}"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">通信地址：</label></td>
-					<td><input type="text" placeholder="请输入通信地址"></td>
+					<td><input type="text" placeholder="请输入通信地址" name="address" value="${requestScope.school.address}"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">办公室电话：</label></td>
-					<td><input type="text" placeholder="请输入办公室电话"></td>
+					<td><input type="text" placeholder="请输入办公室电话" name="officetel" value="${requestScope.school.officetel}"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">传真：</label></td>
-					<td><input type="text" placeholder="请输入传真"></td>
+					<td><input type="text" placeholder="请输入传真" name="fax" value="${requestScope.school.fax}"></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
