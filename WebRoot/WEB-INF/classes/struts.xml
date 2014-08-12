@@ -90,6 +90,11 @@
 			/jsp/school/self.jsp
 		</result>
 	</action>
+	<action name="collage" class="lyh.web.school.CollageAction">
+		<result name="In">
+			/jsp/school/collage.jsp
+		</result>
+	</action>
 </package>
 </struts>    
 
