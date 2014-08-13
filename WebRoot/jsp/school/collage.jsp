@@ -31,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<form class="form-inline" >
 			<label class="text-center">搜索</label>
 			<input type="text" class="input-small" placeholder="关键词">
-			<input type="submit" value="查询">	
-			<input type="button" value="添加学院">
-			<input type="button" value="添加专业">		
+			<input type="submit" value="查询" class="btn btn-primary">	
+			<input type="button" value="添加学院" onclick="toCol()" class="btn btn-success">
+			<input type="button" value="添加专业" onclick="toPro()" class="btn btn-success">		
 		</form>
 	</div>
 	<div id="collage_main">
@@ -49,4 +49,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</table>
 	</div>
 </body>
+
+<script type="text/javascript">
+	function toCol(){
+		window.location = "addCollage";
+	}
+	
+	function toPro(){
+		window.location = "addProfession";
+	}
+</script>
 </html>

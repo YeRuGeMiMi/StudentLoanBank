@@ -1,6 +1,7 @@
 package lyh.po.school;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import lyh.po.user.Member;
 
@@ -15,7 +16,18 @@ public class School implements Serializable{
 	private String officetel;
 	private String fax;
 	private Member member;
+	private Set<Collage> collages;
 	
+	
+	
+	public Set<Collage> getCollages() {
+		return collages;
+	}
+
+	public void setCollages(Set<Collage> collages) {
+		this.collages = collages;
+	}
+
 	public Member getMember() {
 		return member;
 	}

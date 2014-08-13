@@ -30,5 +30,11 @@
 		<many-to-one name="member" class="lyh.po.user.Member" fetch="select">
 			<column name="UID" precision="11"  scale="0" not-null="true" />
 		</many-to-one>
+		<set name="collages" table="school_col">
+		<key>
+			<column name="SCID"></column>
+		</key>
+			<one-to-many class="lyh.po.school.Collage"/>
+		</set>
 	</class>
 </hibernate-mapping>

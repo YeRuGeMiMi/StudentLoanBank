@@ -95,6 +95,16 @@
 			/jsp/school/collage.jsp
 		</result>
 	</action>
+	<action name="addCollage" class="lyh.web.school.AddCollageAction">
+		<result name="In">
+			/jsp/school/addCollage.jsp
+		</result>
+	</action>
+	<action name="addProfession" class="lyh.web.school.AddProfessionAction">
+		<result name="In">
+			/jsp/school/addProfession.jsp
+		</result>
+	</action>
 </package>
 </struts>    
 
