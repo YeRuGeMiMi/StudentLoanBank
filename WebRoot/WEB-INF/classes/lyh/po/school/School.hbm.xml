@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="lyh.po.school.School" table="school">
+	<class name="lyh.po.school.School" table="school" lazy="false">
 		<id name="scid" type="java.lang.Integer">
 			<column name="SCID" precision="11" scale="0" />
 			<generator class="native" />

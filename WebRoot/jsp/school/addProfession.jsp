@@ -32,24 +32,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 	<div class="self_main">
-		<form action="School/self" method="POST">
+		<form action="addProfession" method="POST">
 			
 			<table>
 				<tr>
 					<td align="right"><label class="control-label">专业代码：</label></td>
-					<td><input type="text" placeholder="请输入学院代码" value=""></td>
+					<td><input type="text" placeholder="请输入专业代码" value="" name="procode"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">所属学院：</label></td>
-					<td><select></select></td>
+					<td><select name="collage">
+						<option value="">请选择</option>
+						<c:forEach items="${requestScope.collages}" var="col">
+							<option value="${col.coid }">${col.coname }</option>
+						</c:forEach>
+					</select></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">专业名称：</label></td>
-					<td><input type="text" placeholder="请输入学院名称" value=""></td>
+					<td><input type="text" placeholder="请输入专业名称" value="" name="proname"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">学制：</label></td>
-					<td><select></select></td>
+					<td><select name="year">
+						<option value="">请选择</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select></td>
 				</tr>
 				
 				<tr>

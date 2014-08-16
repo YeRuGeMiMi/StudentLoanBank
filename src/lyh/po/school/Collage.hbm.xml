@@ -3,9 +3,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="lyh.po.school.Collage" table="school_col">
+	<class name="lyh.po.school.Collage" table="school_col" lazy="false">
 		<id name="coid" type="java.lang.Integer">
-			<column name="COID" precision="11" scale="0" />
+			<column name="COID" precision="11"  />
 			<generator class="native" />
 		</id>
 		
@@ -19,6 +19,10 @@
 		<property name="cocode" type="java.lang.String">
 			<column name="COCODE" length="50" not-null="true"></column>
 		</property>
+		<set name="professions" cascade="all" inverse="true">
+			<key column="COID"></key>
+			<one-to-many class="lyh.po.school.Profession"/>
+		</set>
 	</class>
 	
 </hibernate-mapping>

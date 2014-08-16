@@ -1,6 +1,7 @@
 package lyh.po.school;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class Collage implements Serializable {
 	
@@ -8,7 +9,16 @@ public class Collage implements Serializable {
 	private School school;
 	private String coname;
 	private String cocode;
+	private Set<Profession> professions;
 	
+	
+	
+	public Set<Profession> getProfessions() {
+		return professions;
+	}
+	public void setProfessions(Set<Profession> professions) {
+		this.professions = professions;
+	}
 	public String getCocode() {
 		return cocode;
 	}

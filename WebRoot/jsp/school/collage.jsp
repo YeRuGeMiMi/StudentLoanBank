@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
 String path = request.getContextPath();
@@ -46,6 +47,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>学制</th>
 				<th>操作</th>
 			</tr>
+			<c:forEach items="${requestScope.collages}" var="col">
+				<c:forEach items="${col.professions}" var="pro" varStatus="proindex">
+					<tr class="success">
+						<c:if test="${proindex.index == 0}">
+						<td rowspan="${fn:length(col.professions) }" style="vertical-align:middle;">${col.cocode }</td>
+						<td rowspan="${fn:length(col.professions) }" style="vertical-align:middle;">${col.coname }</td>
+						</c:if>
+						<td>${pro.procode }</td>
+						<td>${pro.proname }</td>
+						<td>${pro.year }</td>
+						<td></td>
+					</tr>
+					
+				</c:forEach>
+			</c:forEach>
 		</table>
 	</div>
 </body>

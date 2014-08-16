@@ -99,10 +99,16 @@
 		<result name="In">
 			/jsp/school/addCollage.jsp
 		</result>
+		<result name="Sucess" type="redirectAction">
+			collage			
+		</result>
 	</action>
 	<action name="addProfession" class="lyh.web.school.AddProfessionAction">
 		<result name="In">
 			/jsp/school/addProfession.jsp
+		</result>
+		<result name="Sucess" type="redirectAction">
+			collage
 		</result>
 	</action>
 </package>

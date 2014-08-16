@@ -32,16 +32,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 	<div class="self_main">
-		<form action="School/self" method="POST">
+		<form action="addCollage" method="POST">
 			
 			<table>
 				<tr>
 					<td align="right"><label class="control-label">学院代码：</label></td>
-					<td><input type="text" placeholder="请输入学院代码" value=""></td>
+					<td><input type="text" placeholder="请输入学院代码" value="" name="cocode"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">学院名称：</label></td>
-					<td><input type="text" placeholder="请输入学院名称" value=""></td>
+					<td><input type="text" placeholder="请输入学院名称" value="" name="coname"></td>
 				</tr>
 				
 				<tr>
