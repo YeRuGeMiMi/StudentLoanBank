@@ -1,6 +1,7 @@
 package lyh.dao.school;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.CacheMode;
 import org.hibernate.Query;
@@ -39,13 +40,28 @@ public class CollageDao extends BaseDao{
 	 * @param scid
 	 * @return
 	 */
-	public List<Collage> getBySchool(int scid,int start,int size){
+	public List<Collage> getBySchool(int scid,int start,int size,String textword){
 		
-		String hql = "from Collage as c where c.school.scid=:scid order by c.coid desc";
-		Query query = super.session.createQuery(hql);
-		query.setInteger("scid", scid);
-//		query.setFirstResult(1);
-//		query.setMaxResults(3);
+		StringBuilder hql = new StringBuilder("from Collage as c where c.school.scid=:scid");
+		Query query = null;
+		
+		//查询条件
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" and c.coname like :name");
+			hql.append(" order by c.coid desc");
+			query = super.session.createQuery(hql.toString());
+			query.setInteger("scid", scid);
+			query.setFirstResult(start);
+			query.setMaxResults(size);
+			query.setString("name", "%"+textword+"%");
+		}else{
+			hql.append(" order by c.coid desc");
+			query = super.session.createQuery(hql.toString());
+			query.setInteger("scid", scid);
+			query.setFirstResult(start);
+			query.setMaxResults(size);
+		}
+		
 		
 		query.setCacheMode(CacheMode.IGNORE);
 		List<Collage> list = query.list();
@@ -68,6 +84,33 @@ public class CollageDao extends BaseDao{
 		return list.get(0);
 	}
 	
+	/**
+	 * 根据条件获取总数
+	 * @param keys
+	 * @return
+	 */
+	public int countCollage(int scid,String textword){
+		StringBuilder hql = new StringBuilder("select count(*) from Collage as c where c.school.scid=:scid");
+		Query query = null;
+		
+		//查询条件
+		if(textword != null){
+			hql.append(" and c.coname like :name");
+			query = super.session.createQuery(hql.toString());
+			query.setInteger("scid", scid);
+			query.setString("name", "%"+textword+"%");
+		}else{
+			query = super.session.createQuery(hql.toString());
+			query.setInteger("scid", scid);
+		}
+		
+		
+		//Integer count = (Integer)query.uniqueResult();
+		query.setCacheMode(CacheMode.IGNORE);
+		long count = (Long)query.uniqueResult();
+		
+		return (int)count;
+	}
 	
 
 }

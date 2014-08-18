@@ -1,22 +1,15 @@
 package test;
 
-import lyh.dao.school.CollageDao;
-import lyh.po.school.Collage;
-import lyh.po.school.School;
-import lyh.services.school.SchoolServices;
+import util.PageUtil;
+
+
 
 
 public class TestDemo {
 	public static void main(String[] args) {
-		Collage collage = new Collage();
-		collage.setCocode("xxx343234");
-		collage.setConame("软件学院");
+		PageUtil pageu = new PageUtil(9,4,"slghlsa/",null,1);
+		System.out.println(pageu.showPage());
 		
-		School school = SchoolServices.getOneByUid(17);
-		collage.setSchool(school);
-		
-		CollageDao dao = new CollageDao();
-		dao.saveCollage(collage);
 		
 	}
 }

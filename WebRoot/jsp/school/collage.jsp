@@ -29,9 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<div id="collage_top">
-		<form class="form-inline" >
+		<form class="form-inline" action="collage" method="POST">
 			<label class="text-center">搜索</label>
-			<input type="text" class="input-small" placeholder="关键词">
+			<input type="text" class="input-small" placeholder="学院名" name="textword" value="${requestScope.keys.textword }">
 			<input type="submit" value="查询" class="btn btn-primary">	
 			<input type="button" value="添加学院" onclick="toCol()" class="btn btn-success">
 			<input type="button" value="添加专业" onclick="toPro()" class="btn btn-success">		
@@ -64,6 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</c:forEach>
 		</table>
 	</div>
+	${requestScope.pagepaper}
 </body>
 
 <script type="text/javascript">

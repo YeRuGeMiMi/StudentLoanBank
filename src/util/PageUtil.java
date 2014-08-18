@@ -62,6 +62,9 @@ public class PageUtil {
 		
 		if(keys != null){
 			for(String key : keys.keySet()){
+				if(keys.get(key) == null){
+					continue;
+				}
 				buf.append("&"+key+"="+keys.get(key));
 			}
 			return buf.toString();
@@ -82,9 +85,9 @@ public class PageUtil {
 			//5页显示
 			for(int i=1;i<=this.page;i++){
 				if(i==this.p){
-					buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"hidepage\">"+i+"</a>");
+					buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"btn btn-info\">"+i+"</a>");
 				}else{
-					buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"viewpage\">"+i+"</a>");
+					buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"btn btn-default\">"+i+"</a>");
 				}
 			}
 		}else{
@@ -93,9 +96,9 @@ public class PageUtil {
 				//如果当前页是第一页的情况
 				for(int i=1;i<=5;i++){
 					if(i==this.p){
-						buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"hidepage\">"+i+"</a>");
+						buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"btn btn-info\">"+i+"</a>");
 					}else{
-						buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"viewpage\">"+i+"</a>");
+						buf.append("<a href=\""+this.createFullUrl(i, this.keys)+"\" class=\"btn btn-default\">"+i+"</a>");
 					}
 				}
 				//超过5页部分省略
@@ -103,7 +106,7 @@ public class PageUtil {
 			}else{
 				//当前页不是第一页
 				//显示首页
-				buf.append("<a href=\""+this.createFullUrl(1, this.keys)+"\" class=\"viewpage\">首页</a>");
+				buf.append("<a href=\""+this.createFullUrl(1, this.keys)+"\" class=\"btn btn-default\">首页</a>");
 				buf.append("<span>...</span>");
 				int cou =0;
 				
@@ -116,9 +119,9 @@ public class PageUtil {
 				
 				for(int j =this.p;j<cou;j++){
 					if(j==this.p){
-						buf.append("<a href=\""+this.createFullUrl(j, this.keys)+"\" class=\"hidepage\">"+j+"</a>");
+						buf.append("<a href=\""+this.createFullUrl(j, this.keys)+"\" class=\"btn btn-info\">"+j+"</a>");
 					}else{
-						buf.append("<a href=\""+this.createFullUrl(j, this.keys)+"\" class=\"viewpage\">"+j+"</a>");
+						buf.append("<a href=\""+this.createFullUrl(j, this.keys)+"\" class=\"btn btn-default\">"+j+"</a>");
 					}
 				}
 				
@@ -128,11 +131,11 @@ public class PageUtil {
 				}
 			}
 			//显示尾页
-			buf.append("<a href=\""+this.createFullUrl(this.page, this.keys)+"\" class=\"viewpage\">尾页</a>");
+			buf.append("<a href=\""+this.createFullUrl(this.page, this.keys)+"\" class=\"btn btn-default\">尾页</a>");
 			 
 		}
 		
-		buf.append("到<input type=\"text\" id=\"go\"/>页<button onclick=\"javascript:if(document.getElementById('go').value.match(/^([0-9])*$/)) {window.location='"+this.url+"?p=__PAGE__"+this.createParamUrl(this.keys)+"'.replace('__PAGE__',document.getElementById('go').value);} else {return false;}\">确定</button>");
+		buf.append("到<input type=\"text\" id=\"go\"/>页<button onclick=\"javascript:if(document.getElementById('go').value.match(/^([0-9])*$/)) {window.location='"+this.url+"?p=__PAGE__"+this.createParamUrl(this.keys)+"'.replace('__PAGE__',document.getElementById('go').value);} else {return false;}\" class=\"btn\">确定</button>");
 		buf.append("共"+this.page+"页");
 		buf.append("</div>");
 		return buf.toString();

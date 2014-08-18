@@ -111,10 +111,24 @@ public class SchoolServices extends BaseServices{
 	 * @return
 	 */
 	public static List<Collage> collageList(Map<String,Object> keys){
-		int start=1;  //开始条数
-		int size=4;   //每页显示数
+		int size=(Integer)keys.get("size");   //每页显示数
+		int p=(Integer)keys.get("p");
+		int start;
+		if(p==1 || p==0){
+			start = 0;
+		}else{
+			start = (p-1)*size;
+		}
+		
+		
 		CollageDao dao = new CollageDao();
-		List<Collage> collages = dao.getBySchool((Integer)keys.get("scid"),start,size);
+		
+		//取得总数
+		int total = dao.countCollage((Integer)keys.get("scid"), (String)keys.get("textword"));
+		
+		List<Collage> collages = dao.getBySchool((Integer)keys.get("scid"),start,size,(String)keys.get("textword"));
+		keys.put("total", total);
+		
 		
 		return collages;
 	}

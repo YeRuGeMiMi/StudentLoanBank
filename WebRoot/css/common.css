@@ -44,3 +44,14 @@
 	left: 560px;
 	top:215px;
 }
+
+.footpage{
+	float:right;
+	
+}
+
+.footpage input{
+	width:34px;
+	height:30px;
+}
+
