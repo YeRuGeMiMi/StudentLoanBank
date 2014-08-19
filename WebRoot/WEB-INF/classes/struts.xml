@@ -112,5 +112,15 @@
 		</result>
 	</action>
 </package>
+
+<package name="ajaxPackage" namespace="/Ajax" extends="json-default">
+	<action name="getCollages" class="lyh.web.school.AjaxGetCollagesAction">
+		<result name="jsontree" type="json"/>
+	</action>
+	<action name="getProfessions" class="lyh.web.school.AjaxGetProfessionsAction">
+		<result name="jsontree" type="json" />
+	</action>
+</package>
+
 </struts>    
 

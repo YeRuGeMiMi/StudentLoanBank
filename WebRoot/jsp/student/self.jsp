@@ -16,7 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="keywords" content="">
 <link href="${root}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="${root}/css/common.css" rel="stylesheet"></link>
-<link rel="stylesheet" type="text/css" href="${root}/css/button.css">
 <script src="${root}/js/jquery-1.7.2.min.js"></script>
 <script src="${root}/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -43,10 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>
 					<select id="year" onchange="toMonth(this.value)">
 						<option value="">请选择</option>
-
+						
 					</select>
 					<select id="month" onchange="toDay(this.value)">
-						
 					</select>
 					<select id="day">
 						
@@ -59,15 +57,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
                 <tr>
                     <td align="right"><label class="control-label">所在学校：</label></td>
-                    <td><input type="text" placeholder="请输入你的学校"></td>
+                    <td><select onchange="getCollages(this.value)" id="school" name="school">
+                    	<option>请选择</option>
+                    	<c:forEach items="${requestScope.schools}" var="school">
+							<option value="${school[0] }">${school[1] }</option>
+						</c:forEach>
+                    </select></td>
                 </tr>
                 <tr>
                     <td align="right"><label class="control-label">所属学院：</label></td>
-                    <td><input type="text" placeholder="请输入你的院系"></td>
+                    <td><select onchange="getProfessions(this.value)" id="collage" name="collage">
+
+                    </select></td>
                 </tr>
                 <tr>
                     <td align="right"><label class="control-label">所属专业：</label></td>
-                    <td><input type="text" placeholder="请输入你的专业"></td>
+                    <td><select id="profession" name="profession">
+                    </select></td>
                 </tr>
                 
 				<tr>
@@ -152,6 +158,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$("#day").append("<option value=\""+i+"\">"+i+"</option>");
 			};
 		};
+	</script>
+	<script type="text/javascript">
+		function getCollages(scid){
+			$.ajax({
+				type:"POST",
+				url:"../Ajax/getCollages",
+				data:{school:scid},
+				dataType:"json",
+				success:function(data){
+					var result = data.result;
+					$("#collage").append("<option value=\"\">请选择</option>");
+					for (var key in result) {
+						$("#collage").append("<option value=\""+key+"\">"+result[key]+"</option>");
+					};
+				}
+			});
+		}
+		
+		function getProfessions(coid){
+			$.ajax({
+				type:"POST",
+				url:"../Ajax/getProfessions",
+				data:{coid:coid},
+				dataType:"json",
+				success:function(data){
+					var result = data.result;
+					$("#profession").append("<option value=\"\">请选择</option>");
+					for (var key in result) {
+						$("#profession").append("<option value=\""+key+"\">"+result[key]+"</option>");
+					};
+				}
+			});
+		}
 	</script>
 </body>
 

@@ -59,7 +59,7 @@ public class SchoolDao extends BaseDao{
 	public List<School> getAllSchool(){
 		List<School> list = null;
 		
-		String hql = "from School";
+		String hql = "select s.scid,s.name from School as s";
 		Query query = super.session.createQuery(hql);
 		list = query.list();
 		

@@ -1,15 +1,12 @@
 package lyh.dao.school;
 
 import java.util.List;
-import java.util.Map;
 
 import org.hibernate.CacheMode;
 import org.hibernate.Query;
 
-import util.HibernateSessionFactory;
 import lyh.base.BaseDao;
 import lyh.po.school.Collage;
-import lyh.po.school.School;
 
 public class CollageDao extends BaseDao{
 	
@@ -112,5 +109,18 @@ public class CollageDao extends BaseDao{
 		return (int)count;
 	}
 	
-
+	/**
+	 * 取得学院名和学院ID的对
+	 * @param scid
+	 * @return
+	 */
+	public List<Collage> getQueueCollage(int scid){
+		String hql = "from Collage as c where c.school.scid=:scid";
+		Query query = super.session.createQuery(hql);
+		query.setInteger("scid", scid);
+		
+		List<Collage> list = query.list();
+		
+		return list;
+	}
 }

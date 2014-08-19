@@ -34,7 +34,7 @@ public class ProfessionDao extends BaseDao{
 	}
 	
 	/**
-	 * qu
+	 * 根据学院ID取得专业
 	 * @param coid
 	 * @return
 	 */

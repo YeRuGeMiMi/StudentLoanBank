@@ -1,6 +1,6 @@
 package lyh.services.school;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,4 +133,39 @@ public class SchoolServices extends BaseServices{
 		return collages;
 	}
 	
+	/**
+	 * 根据学校ID取得学院ID和学院名的键值对
+	 * @param scid
+	 * @return
+	 */
+	public static Map<String,String> ajaxCollages(int scid){
+		Map<String,String> map = new HashMap<String,String>();
+		
+		CollageDao dao = new CollageDao();
+		List<Collage> list = dao.getQueueCollage(scid);
+		
+		for(Collage co : list){
+			map.put(String.valueOf(co.getCoid()), co.getConame());
+		}
+		
+		return map;
+	}
+	
+	/**
+	 * 根据学院ID取得专业ID和专业名的键值对
+	 * @param coid
+	 * @return
+	 */
+	public static Map<String,String> ajaxProfessions(int coid){
+		Map<String,String> map = new HashMap<String,String>();
+		
+		ProfessionDao dao = new ProfessionDao();
+		List<Profession> list = dao.getByCollage(coid);
+		
+		for(Profession pro : list){
+			map.put(String.valueOf(pro.getProid()), pro.getProname());
+		}
+		
+		return map;
+	}
 }
