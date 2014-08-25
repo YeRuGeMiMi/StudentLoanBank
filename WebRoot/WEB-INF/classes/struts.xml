@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<!-- 设置开发模式的开启 -->
+<constant name="struts.devMode" value="true" />
+<!-- 申明登入Action包 -->
+<package name="defaultPackage" extends="struts-default" namespace="/">
+	<!-- 全局拦截器 -->
+	<interceptors>
+		<!-- 定义拦截器栈 -->
+		<interceptor-stack name="defStack">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 自定义拦截器添加到拦截器栈中 -->
+			<interceptor-ref name="sessionNull"></interceptor-ref>
+		</interceptor-stack>
+		<!-- 自定义拦截器 -->
+		<interceptor name="sessionNull" class="lyh.base.SessionNullInterceptor"></interceptor>
+	</interceptors>
+	<!-- 调用拦截器 -->
+	<default-interceptor-ref name="defStack" />
+	
+	<!-- 定义全局结果集 -->
+	<global-results>
+		<result name="sessionnull" type="redirectAction">
+			<param name="namespace">/User</param>
+			<param name="actionName">login</param>
+		</result>
+	</global-results>
+	
+	
+</package>
+
+<package name="userPackage" namespace="/User" extends="defaultPackage">
+	<!--登入验证-->
+	<action name="login" class="lyh.web.user.LoginAction">
+		<result name="In">
+			/jsp/user/login.jsp
+		</result>
+		<result name="sucess" type="redirectAction">
+			<param name="namespace">/Index</param>
+			<param name="actionName">index</param>
+		</result>
+		<result name="fail">
+			/jsp/user/login.jsp
+		</result>
+	</action>
+	
+	<action name="quit" class="lyh.web.user.QuitAction">
+		<result name="sucess" type="redirectAction">
+			<param name="namespace">/User</param>
+			<param name="actionName">login</param>
+		</result>
+	</action>
+</package>
+
+<package name="indexPackage" namespace="/Index" extends="defaultPackage">
+	<action name="index" class="lyh.web.index.IndexAction">
+		<result name="In">
+			/jsp/index/index.jsp
+		</result>
+	</action>
+</package>
+
+<package name="studentPackage" namespace="/Student" extends="defaultPackage">
+	<action name="info" class="lyh.web.studnet.InfoAction">
+		<result name="In">
+			/jsp/student/info.jsp
+		</result>
+	</action>
+	<action name="self" class="lyh.web.studnet.SelfAction">
+		<result name="In">
+			/jsp/student/self.jsp
+		</result>
+		<result name="sucess">
+			/jsp/student/mySelf.jsp
+		</result>
+	</action>
+</package>
+<package name="regPackage" namespace="/Reg" extends="struts-default">
+	<action name="reg" class="lyh.web.user.RegAction">
+		<result name="In">
+			/jsp/user/reg.jsp
+		</result>
+		<result name="sucess">
+			/jsp/user/login.jsp
+		</result>
+	</action>
+</package>
+
+<package name="schoolPackage" namespace="/School" extends="defaultPackage">
+	<action name="self" class="lyh.web.school.SelfAction">
+		<result name="In">
+			/jsp/school/self.jsp
+		</result>
+		<result name="sucess">
+			/jsp/school/mySelf.jsp
+		</result>
+	</action>
+	<action name="collage" class="lyh.web.school.CollageAction">
+		<result name="In">
+			/jsp/school/collage.jsp
+		</result>
+	</action>
+	<action name="addCollage" class="lyh.web.school.AddCollageAction">
+		<result name="In">
+			/jsp/school/addCollage.jsp
+		</result>
+		<result name="Sucess" type="redirectAction">
+			collage			
+		</result>
+	</action>
+	<action name="addProfession" class="lyh.web.school.AddProfessionAction">
+		<result name="In">
+			/jsp/school/addProfession.jsp
+		</result>
+		<result name="Sucess" type="redirectAction">
+			collage
+		</result>
+	</action>
+</package>
+
+<package name="ajaxPackage" namespace="/Ajax" extends="json-default">
+	<action name="getCollages" class="lyh.web.school.AjaxGetCollagesAction">
+		<result name="jsontree" type="json"/>
+	</action>
+	<action name="getProfessions" class="lyh.web.school.AjaxGetProfessionsAction">
+		<result name="jsontree" type="json" />
+	</action>
+</package>
+
+</struts>    
+
