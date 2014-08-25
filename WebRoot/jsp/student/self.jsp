@@ -30,12 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<div class="self_main">
-		<form action="" method="">
+		<form action="self" method="POST" enctype="multipart/form-data">
 			
 			<table>
 				<tr>
 					<td align="right"><label class="control-label">姓名：</label></td>
-					<td><input type="text" placeholder="请输入你的姓名"></td>
+					<td><input type="text" placeholder="请输入你的姓名" name="name"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">出生年月日：</label></td>
@@ -46,14 +46,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</select>
 					<select id="month" onchange="toDay(this.value)">
 					</select>
-					<select id="day">
+					<select id="day" onchange="toBorn()">
 						
 					</select>
+					<input type="hidden" id="born" name="born"/>
 				</td>
 				</tr>
 				<tr>
                     <td align="right"><label class="control-label">身份证号：</label></td>
-                    <td><input type="text" placeholder="请输入你的身份证号"></td>
+                    <td><input type="text" placeholder="请输入你的身份证号" name="selfcode"></td>
                 </tr>
                 <tr>
                     <td align="right"><label class="control-label">所在学校：</label></td>
@@ -78,31 +79,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
 				<tr>
 					<td align="right"><label class="control-label">校园卡号：</label></td>
-					<td><input type="text" placeholder="请输入你的校园卡号"></td>
+					<td><input type="text" placeholder="请输入你的校园卡号" name="schoolcode"></td>
 				</tr>
 				<tr>
                     <td align="right"><label class="control-label">家庭住址：</label></td>
-                    <td><input type="text" placeholder="请输入你的地址"></td>
+                    <td><input type="text" placeholder="请输入你的地址" name="address"></td>
                 </tr>
 				<tr>
 					<td align="right"><label class="control-label" >邮箱：</label></td>
-					<td><input type="text" placeholder="请输入你的合法邮箱"></td>
+					<td><input type="text" placeholder="请输入你的合法邮箱" name="email"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">手机号码：</label></td>
-					<td><input type="text" placeholder="请输入你的手机号码"></td>
+					<td><input type="text" placeholder="请输入你的手机号码" name="phone"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">头像：</label></td>
-					<td><input type="file"></td>
+					<td><input type="file" name="photo"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">开户银行：</label></td>
-					<td><input type="text" placeholder="请输入你的开户银行"></td>
+					<td><input type="text" placeholder="请输入你的开户银行" name="bank"></td>
 				</tr>
 				<tr>
 					<td align="right"><label class="control-label">银行卡号：</label></td>
-					<td><input type="text" placeholder="请输入你的银行卡号"></td>
+					<td><input type="text" placeholder="请输入你的银行卡号" name="bankcode"></td>
 				</tr>
 				
 				<tr>
@@ -117,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		window.onload = function(){
 			y = new Date().getFullYear();
-			for(var i=(y-90);i<=y;i++){
+			for(var i=y;i>=(y-90);i--){
 				//DOM对象添加
 				// $("#year")[0].options.add(new Option(i,i));
 				// $("#year")[0].options.value=y;
@@ -130,7 +131,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(year == null){
 				return false;
 			};
-
+			
+			$("#month > *").remove();
+			$("#day > *").remove();
 			$("#month").append("<option value=\"\">请选择</option>");
 			for (var i = 1; i <= 12; i++) {
 				$("#month").append("<option value=\""+i+"\">"+i+"</option>");
@@ -141,7 +144,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(month == null){
 				return false;
 			};
-
+			
+			$("#day > *").remove();
 			$("#day").append("<option value=\"\">请选择</option>");
 			if(month == 2){
 				var year = $("#year").val();
@@ -158,9 +162,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$("#day").append("<option value=\""+i+"\">"+i+"</option>");
 			};
 		};
+		
+		function toBorn(){
+			var year = $("#year").val();
+			var month = $("#month").val();
+			var day = $("#day").val();
+			
+			if(month.length == 1){
+				month = "0"+month;
+			}			
+			
+			if(day.length == 1){
+				day = "0"+day;
+			}
+			var born = year+month+day;
+			$("#born").val(born);
+		}
 	</script>
 	<script type="text/javascript">
 		function getCollages(scid){
+			$("#collage > *").remove();
+			$("#profession > *").remove();
+		
 			$.ajax({
 				type:"POST",
 				url:"../Ajax/getCollages",
@@ -177,6 +200,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function getProfessions(coid){
+			$("#profession > *").remove();
+		
 			$.ajax({
 				type:"POST",
 				url:"../Ajax/getProfessions",

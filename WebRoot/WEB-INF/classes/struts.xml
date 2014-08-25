@@ -71,6 +71,9 @@
 		<result name="In">
 			/jsp/student/self.jsp
 		</result>
+		<result name="sucess">
+			/jsp/student/mySelf.jsp
+		</result>
 	</action>
 </package>
 <package name="regPackage" namespace="/Reg" extends="struts-default">
@@ -88,6 +91,9 @@
 	<action name="self" class="lyh.web.school.SelfAction">
 		<result name="In">
 			/jsp/school/self.jsp
+		</result>
+		<result name="sucess">
+			/jsp/school/mySelf.jsp
 		</result>
 	</action>
 	<action name="collage" class="lyh.web.school.CollageAction">

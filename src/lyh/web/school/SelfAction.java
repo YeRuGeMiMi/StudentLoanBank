@@ -76,6 +76,13 @@ public class SelfAction extends BaseAction{
 		Member member = (Member)super.session.get("member");
 		
 		String method = ServletActionContext.getRequest().getMethod();
+		School sch = SchoolServices.getOneByUid(member.getUid());
+		
+		if(sch != null){
+			super.request.put("school", sch);
+			return "sucess";
+		}
+		
 		if(method.equals("POST")){
 			Map<String,Object> keys = new HashMap<String, Object>();
 			
@@ -94,12 +101,7 @@ public class SelfAction extends BaseAction{
 			}
 		}
 		
-		int uid = member.getUid();
-		School school = SchoolServices.getOneByUid(uid);
 		
-		if(school != null){
-			super.request.put("school", school);
-		}
 		
 		return "In";
 	}

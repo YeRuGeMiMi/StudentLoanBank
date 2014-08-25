@@ -48,4 +48,19 @@ public class ProfessionDao extends BaseDao{
 		
 		return pros;
 	}
+	
+	/**
+	 * ID查询一个专业
+	 * @param proid
+	 * @return
+	 */
+	public Profession getProfession(int proid){
+		String hql = "from Profession as p where p.proid=:proid";
+		Query query = super.session.createQuery(hql);
+		query.setInteger("proid", proid);
+		
+		List<Profession> list = query.list();
+		
+		return list.get(0);
+	}
 }

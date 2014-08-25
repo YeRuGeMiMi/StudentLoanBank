@@ -65,5 +65,22 @@ public class SchoolDao extends BaseDao{
 		
 		return list;
 	}
+	
+	/**
+	 * ID查询
+	 * @param scid
+	 * @return
+	 */
+	public School getSchool(int scid){
+		String hql = "from School as s where s.scid=:scid";
+		Query query = super.session.createQuery(hql);
+		query.setInteger("scid", scid);
+		
+		List<School> list = query.list();
+		
+		School school = list.get(0);
+		
+		return school;
+	}
 
 }
