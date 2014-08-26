@@ -9,11 +9,10 @@ import org.apache.struts2.ServletActionContext;
 import util.PageUtil;
 
 import lyh.base.BaseAction;
-import lyh.po.school.Collage;
-import lyh.po.user.Member;
+import lyh.po.school.School;
 import lyh.services.school.SchoolServices;
 
-public class CollageAction extends BaseAction{
+public class ListAction extends BaseAction{
 	private String textword;
 	private String p;
 	
@@ -22,6 +21,8 @@ public class CollageAction extends BaseAction{
 	public String getTextword() {
 		return textword;
 	}
+
+
 
 	public void setTextword(String textword) {
 		this.textword = textword;
@@ -43,12 +44,10 @@ public class CollageAction extends BaseAction{
 
 	@Override
 	public String execute() throws Exception {
-		Member member = (Member)super.session.get("member");
+		String method = ServletActionContext.getRequest().getMethod();
 		Map<String,Object> keys = new HashMap<String,Object>();
-		keys.put("scid", SchoolServices.getOneByUid(member.getUid()).getScid());
 		keys.put("size", 6);
 		
-		String method = ServletActionContext.getRequest().getMethod();
 		if("POST".equals(method)){
 			keys.put("p", 1);
 		}else{
@@ -57,17 +56,15 @@ public class CollageAction extends BaseAction{
 			}else{
 				keys.put("p", Integer.parseInt(p));
 			}
-			
 		}
-		
 		keys.put("textword", textword);
 		
-		List<Collage> collages = SchoolServices.collageList(keys);
+		List<School> schools = SchoolServices.schoolList(keys);
 		
 		//分页
 		int total = (Integer)keys.get("total");
 		int element = (Integer)keys.get("size");
-		String url = "collage";
+		String url = "list";
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("textword", keys.get("textword"));
 		int p = (Integer)keys.get("p");
@@ -75,12 +72,11 @@ public class CollageAction extends BaseAction{
 		String pagepaper = util.showPage();
 		
 		super.request.put("pagepaper", pagepaper);
-		super.request.put("collages", collages);
+		super.request.put("schools", schools);
 		super.request.put("keys", keys);
 		
 		return "In";
 	}
-	
 	
 
 }

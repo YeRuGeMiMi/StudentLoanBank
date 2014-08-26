@@ -168,4 +168,30 @@ public class SchoolServices extends BaseServices{
 		
 		return map;
 	}
+	
+	/**
+	 * 
+	 * @param keys
+	 * @return
+	 */
+	public static List<School> schoolList(Map<String,Object> keys){
+		int size=(Integer)keys.get("size");   //每页显示数
+		int p=(Integer)keys.get("p");
+		int start;
+		if(p==1 || p==0){
+			start = 0;
+		}else{
+			start = (p-1)*size;
+		}
+		
+		SchoolDao dao = new SchoolDao();
+		
+		//取得总数
+		int total = dao.countSchool( (String)keys.get("textword"));
+		
+		List<School> schools = dao.getByFy(start,size,(String)keys.get("textword"));
+		keys.put("total", total);
+		
+		return schools;
+	}
 }

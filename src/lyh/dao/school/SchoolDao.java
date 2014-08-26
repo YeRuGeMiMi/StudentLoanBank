@@ -2,6 +2,7 @@ package lyh.dao.school;
 
 import java.util.List;
 
+import org.hibernate.CacheMode;
 import org.hibernate.Query;
 
 import util.HibernateSessionFactory;
@@ -81,6 +82,68 @@ public class SchoolDao extends BaseDao{
 		School school = list.get(0);
 		
 		return school;
+	}
+	
+	/**
+	 * 查询学校（带查询条件）
+	 * @param scid
+	 * @param start
+	 * @param size
+	 * @param textword
+	 * @return
+	 */
+	public List<School> getByFy(int start,int size,String textword){
+		StringBuilder hql = new StringBuilder("from School as s");
+		Query query = null;
+		
+		//查询条件
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" where s.name like :name");
+			hql.append(" or s.scode like :code");
+			hql.append(" order by s.scid DESC");
+			query = super.session.createQuery(hql.toString());
+			query.setString("name", "%"+textword+"%");
+			query.setString("code", "%"+textword+"%");
+		}else{
+			query = super.session.createQuery(hql.toString());
+		}
+		
+		query.setCacheMode(CacheMode.IGNORE);
+		List<School> schools = query.list();
+		
+		if(schools.size()>0){
+			return schools;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 根据条件获得学校总数
+	 * @param scid
+	 * @param textword
+	 * @return
+	 */
+	public int countSchool(String textword){
+		StringBuilder hql = new StringBuilder("select count(*) from School as s");
+		Query query = null;
+		
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" where s.name like :name");
+			hql.append(" or s.scode like :code");
+			hql.append(" order by s.scid DESC");
+			query = super.session.createQuery(hql.toString());
+			query.setString("name", "%"+textword+"%");
+			query.setString("code", "%"+textword+"%");
+		}else{
+			query = super.session.createQuery(hql.toString());
+		}
+		
+		query.setCacheMode(CacheMode.IGNORE);
+		long count = (Long)query.uniqueResult();
+		
+		return (int)count;
+		
 	}
 
 }
