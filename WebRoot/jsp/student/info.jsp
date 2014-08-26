@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
+<%@ taglib uri="http://www.lyh.com" prefix="yl"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <%
 String path = request.getContextPath();
@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="student_top">
 		<form class="form-inline" action="info" method="POST">
 			<label class="text-center">搜索</label>
-			<input type="text" class="input-small" placeholder="学生名" name="textword" value="${requestScope.keys.textword }">
+			<input type="text" class="input-small" placeholder="关键词" name="textword" value="${requestScope.keys.textword }">
 			<input type="submit" value="查询" class="btn btn-primary">	
 			
 		</form>
@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="student_main">
 		<table class="table table-condensed">
 			<tr>
-				<th>学生代号</th>
+				<th>校园卡号</th>
 				<th>姓名</th>
 				<th>邮箱</th>
 				<th>学院</th>
@@ -47,7 +47,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>生日</th>
 				<th>操作</th>
 			</tr>
-			
+			<c:forEach items="${requestScope.students}" var="student">
+				<tr>
+					<td>${student.schoolcode }</td>
+					<td>${student.name }</td>
+					<td>${student.email }</td>
+					<td>${student.collage.coname }</td>
+					<td>${student.profession.proname }</td>
+					<td><yl:dateFomat name="${student.born}"></yl:dateFomat></td>
+					<td></td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 	${requestScope.pagepaper}

@@ -91,7 +91,7 @@ public class CollageDao extends BaseDao{
 		Query query = null;
 		
 		//查询条件
-		if(textword != null){
+		if(!"null".equals(textword)&&textword != null){
 			hql.append(" and c.coname like :name");
 			query = super.session.createQuery(hql.toString());
 			query.setInteger("scid", scid);

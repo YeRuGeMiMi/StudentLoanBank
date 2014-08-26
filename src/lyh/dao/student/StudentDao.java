@@ -2,6 +2,7 @@ package lyh.dao.student;
 
 import java.util.List;
 
+import org.hibernate.CacheMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
@@ -94,5 +95,73 @@ public class StudentDao extends BaseDao{
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 按学校查询学生（分页查询）
+	 * @param scid
+	 * @param start
+	 * @param size
+	 * @param textword
+	 * @return
+	 */
+	public List<Student> getBySchool(int scid,int start,int size,String textword){
+		StringBuilder hql = new StringBuilder("from Student as stu where stu.school.scid=:scid");
+		
+		Query query = null;
+		
+		//查询条件
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" and stu.name like :name");
+			hql.append(" or stu.schoolcode like :code");
+			hql.append(" order by stu.stid DESC");
+			query = super.session.createQuery(hql.toString());
+			query.setString("name", "%"+textword+"%");
+			query.setString("code", "%"+textword+"%");
+		}else{
+			hql.append(" order by stu.stid DESC");
+			query = super.session.createQuery(hql.toString());
+		}
+		query.setInteger("scid", scid);
+		
+		//设置分页
+		query.setFirstResult(start);
+		query.setMaxResults(size);
+		
+		//查询结果
+		query.setCacheMode(CacheMode.IGNORE);
+		List<Student> list = query.list();
+		
+		return list;
+	}
+	
+	/**
+	 * 获得一个学校学生总数（带查询条件）
+	 * @param scid
+	 * @param textword
+	 * @return
+	 */
+	public int getCountSchool(int scid,String textword){
+		StringBuilder hql = new StringBuilder("select count(*) from Student as stu where stu.school.scid=:scid");
+		Query query = null;
+		
+		//查询条件
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" and stu.name like :name");
+			hql.append(" or stu.schoolcode like :code");
+			query = super.session.createQuery(hql.toString());
+			query.setString("name", "%"+textword+"%");
+			query.setString("code", "%"+textword+"%");
+		}else{
+			query = super.session.createQuery(hql.toString());
+		}
+		query.setInteger("scid", scid);
+		
+		//查询结果
+		query.setCacheMode(CacheMode.IGNORE);
+		long count = (Long)query.uniqueResult();
+		
+		return (int)count;
+		
 	}
 }

@@ -166,4 +166,28 @@ public class StudentServices extends BaseServices{
 		
 		return list;
 	}
+	
+	/**
+	 * 分页查询学校的学生
+	 * @param keys
+	 * @return
+	 */
+	public List<Student> getSetudentsByFy(Map<String,Object> keys){
+		int size=(Integer)keys.get("size");   //每页显示数
+		int p=(Integer)keys.get("p");
+		int start;
+		if(p==1 || p==0){
+			start = 0;
+		}else{
+			start = (p-1)*size;
+		}
+		
+		StudentDao dao = new StudentDao();
+		int totoal = dao.getCountSchool((Integer)keys.get("scid"), (String)keys.get("textword"));
+		
+		List<Student> students = dao.getBySchool((Integer)keys.get("scid"),start,size,(String)keys.get("textword"));
+		keys.put("total", totoal);
+		
+		return students;
+	}
 }
