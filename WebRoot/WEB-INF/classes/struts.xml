@@ -132,6 +132,20 @@
 		<result name="jsontree" type="json" />
 	</action>
 </package>
-
+<package name="bankPackage" namespace="/Bank" extends="defaultPackage">
+	<action name="self" class="lyh.web.bank.SelfAction">
+		<result name="In">
+			/jsp/bank/self.jsp
+		</result>
+		<result name="sucess">
+			/jsp/bank/mySelf.jsp
+		</result>
+	</action>
+	<action name="list" class="lyh.web.bank.ListAction">
+		<result name="In">
+			/jsp/bank/list.jsp
+		</result>
+	</action>
+</package>
 </struts>    
 

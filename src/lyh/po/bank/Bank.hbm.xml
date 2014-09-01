@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="lyh.po.bank.Bank" table="bank">
+		<id name="bid" type="java.lang.Integer">
+			<column name="BID" precision="11" scale="0" />
+			<generator class="native" />
+		</id>
+		<property name="bname" type="java.lang.String">
+			<column name="BNAME" length="50" not-null="true"></column>
+		</property>
+		
+		<property name="officetel" type="java.lang.String">
+			<column name="OFFICETEL" length="30" not-null="true"></column>
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="EMAIL" length="30" not-null="true"></column>
+		</property>
+		<property name="bcode" type="java.lang.String">
+			<column name="BCODE" length="30" not-null="true"></column>
+		</property>
+		<many-to-one name="member" class="lyh.po.user.Member" fetch="select">
+			<column name="UID" precision="11"  scale="0" not-null="true" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>
