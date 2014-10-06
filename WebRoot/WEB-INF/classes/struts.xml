@@ -147,5 +147,12 @@
 		</result>
 	</action>
 </package>
+<package name="orderPackage" namespace="/Order" extends="defaultPackage">
+	<action name="add" class="lyh.web.order.AddOrderAction">
+		<result name="In">
+			/jsp/order/add.jsp
+		</result>
+	</action>
+</package>
 </struts>    
 
