@@ -44,7 +44,7 @@ public class BankServices extends BaseServices{
 	}
 	
 	/**
-	 * 获取所有的银行信息
+	 * 获取所有的银行信息(分页)
 	 * @return
 	 */
 	public List<Bank> getAllBank(Map<String,Object> keys){
@@ -70,5 +70,15 @@ public class BankServices extends BaseServices{
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 获取所有的银行信息(无分页)
+	 * @return
+	 */
+	public List<Bank> getAllBank(){
+		BankDao dao = new BankDao();
+		List<Bank> list = dao.getAll();
+		return list;
 	}
 }

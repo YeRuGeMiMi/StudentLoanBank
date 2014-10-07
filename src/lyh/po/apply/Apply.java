@@ -10,6 +10,7 @@ import lyh.po.student.Student;
  */
 public class Apply {
 	/**属性**/
+	private int apid;          //申请单id
 	private Student student;   //发起申请单的学生
 	private Bank bank;    	    //申请单对应的银行
 	private int created;     	//创建申请单的时间
@@ -59,6 +60,12 @@ public class Apply {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public int getApid() {
+		return apid;
+	}
+	public void setApid(int apid) {
+		this.apid = apid;
 	}
 	
 	

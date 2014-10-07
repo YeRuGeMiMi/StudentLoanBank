@@ -76,8 +76,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 					<td>选择银行：</td>
-					<td><select>
+					<td><select name="bank">
 						<option>请选择</option>
+						<c:forEach items="${requestScope.banks}" var="bank">
+							<option value="${bank.bid }">${bank.bname }</option>
+						</c:forEach>
 					</select></td>
 				</tr>
 				<tr>

@@ -52,7 +52,26 @@ public class BankDao extends BaseDao{
 	}
 	
 	/**
-	 * 取得全部
+	 * 取得一跳银行（按bid）
+	 * @return
+	 */
+	public Bank getOneByBid(int bid){
+		String hql = "from Bank as b where b.bid=:bid";
+		
+		Query query = super.session.createQuery(hql);
+		query.setInteger("bid", bid);
+		
+		List<Bank> list = query.list();
+		
+		if(list.size() == 1){
+			return list.get(0);
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 取得全部(按参数)
 	 * @return
 	 */
 	public List<Bank> getAll(int start,int size,String textword){
@@ -74,6 +93,22 @@ public class BankDao extends BaseDao{
 		query.setCacheMode(CacheMode.IGNORE);
 		List<Bank> list = query.list();
 		
+		if(list.size()>0){
+			return list;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * 取得全部(无参数)
+	 * @return
+	 */
+	public List<Bank> getAll(){
+		String hql = "from Bank";
+		Query query = super.session.createQuery(hql);
+		query.setCacheMode(CacheMode.IGNORE);
+		List<Bank> list = query.list();
 		if(list.size()>0){
 			return list;
 		}
@@ -105,4 +140,5 @@ public class BankDao extends BaseDao{
 		long count = (Long)query.uniqueResult();
 		return (int)count;
 	}
+	
 }
