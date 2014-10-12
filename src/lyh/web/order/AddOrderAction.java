@@ -1,10 +1,13 @@
 package lyh.web.order;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
 import lyh.base.BaseAction;
+import lyh.po.apply.Apply;
 import lyh.po.bank.Bank;
 import lyh.po.student.Student;
 import lyh.po.user.Member;
@@ -51,12 +54,27 @@ public class AddOrderAction extends BaseAction{
 	public String execute() throws Exception {
 		Member member = (Member) super.session.get("member");
 		String method = ServletActionContext.getRequest().getMethod();
+		ApplyServices applySer = new ApplyServices();
+		
 		//取得学生信息
 		StudentServices studentSer = new StudentServices();
 		Student student = studentSer.getByUid(member.getUid());
 		
+		//获取一个学生的申请单
+		Apply apply = applySer.getApply(student);
+		if(apply != null){
+			Map<Integer,String> order_status = new HashMap<Integer,String>();
+			order_status.put(1, "已提交学校审核");
+			order_status.put(2, "已提交银行审核");
+			order_status.put(3, "申请已经审核通过");
+			order_status.put(4, "申请被拒绝");
+			
+			super.request.put("status", order_status.get(apply.getStatus()));
+			return "Su";
+		}
+		
 		if(method.equals("POST")){
-			ApplyServices applySer = new ApplyServices();
+			
 			boolean bool = applySer.createApply(student, Integer.parseInt(bank), bankcode, Float.valueOf(money));
 		}
 		

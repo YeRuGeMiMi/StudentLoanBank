@@ -152,6 +152,9 @@
 		<result name="In">
 			/jsp/order/add.jsp
 		</result>
+		<result name="Su">
+			/jsp/order/status.jsp
+		</result>
 	</action>
 </package>
 </struts>    

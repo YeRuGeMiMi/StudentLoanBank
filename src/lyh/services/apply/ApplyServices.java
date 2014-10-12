@@ -43,4 +43,16 @@ public class ApplyServices extends BaseServices{
 		
 		return false;
 	}
+	
+	/**
+	 * 获取一个学生的申请单
+	 * @param student
+	 * @return
+	 */
+	public Apply getApply(Student student){
+		ApplyDao dao = new ApplyDao();
+		Apply apply = dao.getByStid(student.getStid());
+		
+		return apply;
+	}
 }
