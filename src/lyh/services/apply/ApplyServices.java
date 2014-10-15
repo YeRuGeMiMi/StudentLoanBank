@@ -1,5 +1,8 @@
 package lyh.services.apply;
 
+import java.util.List;
+import java.util.Map;
+
 import util.Common;
 import lyh.base.BaseServices;
 import lyh.dao.apply.ApplyDao;
@@ -33,7 +36,7 @@ public class ApplyServices extends BaseServices{
 		apply.setCreated(Common.getDate());
 		apply.setLast_update(Common.getDate());
 		apply.setStatus(1);                   //设置状态为学生提交订单，学校未审核
-		
+		apply.setApsn(Common.getApplySN());  //设置申请单的编号
 		//创建申请单
 		ApplyDao dao = new ApplyDao();
 		Apply result = dao.create(apply);
@@ -53,6 +56,42 @@ public class ApplyServices extends BaseServices{
 		ApplyDao dao = new ApplyDao();
 		Apply apply = dao.getByStid(student.getStid());
 		
+		return apply;
+	}
+	
+	/**
+	 * 取得学校的申请单列表
+	 * @return
+	 */
+	public List<Apply> getSchoolApplyList(Map<String,Object> keys){
+		int size=(Integer)keys.get("size");   //每页显示数
+		int p=(Integer)keys.get("p");
+		int start;
+		if(p==1 || p==0){
+			start = 0;
+		}else{
+			start = (p-1)*size;
+		}
+		
+		ApplyDao dao = new ApplyDao();
+		
+		//取得总数
+		int total = dao.count((String)keys.get("textword"), (Integer)keys.get("scid"));
+		keys.put("total", total);
+		//取得申请单
+		List<Apply> list = dao.getAll(start, size, (String)keys.get("textword"), (Integer)keys.get("scid"));
+		
+		return list;
+	}
+	
+	/**
+	 * 取得一条申请单
+	 * @param apid
+	 * @return
+	 */
+	public Apply getApply(int apid){
+		ApplyDao dao = new ApplyDao();
+		Apply apply = dao.getApply(apid);
 		return apply;
 	}
 }

@@ -8,6 +8,9 @@
 			<column name="APID" precision="11" scale="0" />
 			<generator class="native" />
 		</id>
+		<property name="apsn" type="java.lang.Integer">
+			<column name="APSN" length="10" not-null="true"></column>
+		</property>
 		<many-to-one name="student" class="lyh.po.student.Student" fetch="select">
 			<column name="STID" precision="11"  scale="0" not-null="true" />
 		</many-to-one>

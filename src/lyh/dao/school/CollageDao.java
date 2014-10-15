@@ -43,7 +43,7 @@ public class CollageDao extends BaseDao{
 		Query query = null;
 		
 		//查询条件
-		if(!"null".equals(textword)&&textword != null){
+		if(!"".equals(textword)&&textword != null){
 			hql.append(" and c.coname like :name");
 			hql.append(" order by c.coid desc");
 			query = super.session.createQuery(hql.toString());

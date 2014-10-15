@@ -76,6 +76,11 @@ public class AddOrderAction extends BaseAction{
 		if(method.equals("POST")){
 			
 			boolean bool = applySer.createApply(student, Integer.parseInt(bank), bankcode, Float.valueOf(money));
+			
+			if(bool){
+				super.request.put("status","已提交学校审核");
+				return "Su";
+			}
 		}
 		
 		//取得银行列表

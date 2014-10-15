@@ -84,10 +84,14 @@ public class BankDao extends BaseDao{
 			hql.append(" or b.bcode like :code");
 			hql.append(" order by b.bid DESC");
 			query = super.session.createQuery(hql.toString());
+			query.setFirstResult(start);
+			query.setMaxResults(size);
 			query.setString("name", "%"+textword+"%");
 			query.setString("code", "%"+textword+"%");
 		}else{
 			query = super.session.createQuery(hql.toString());
+			query.setFirstResult(start);
+			query.setMaxResults(size);
 		}
 		
 		query.setCacheMode(CacheMode.IGNORE);
@@ -128,7 +132,6 @@ public class BankDao extends BaseDao{
 		if(!"null".equals(textword)&&textword != null){
 			hql.append(" where b.bname like :name");
 			hql.append(" or b.bcode like :code");
-			hql.append(" order by b.bid DESC");
 			query = super.session.createQuery(hql.toString());
 			query.setString("name", "%"+textword+"%");
 			query.setString("code", "%"+textword+"%");
