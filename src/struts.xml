@@ -166,6 +166,12 @@
 			/jsp/order/orderItem.jsp
 		</result>
 	</action>
+	<action name="apply" class="lyh.web.order.ApplyAction">
+		<result name="school" type="redirectAction">
+			<param name="actionName">orderItem</param>
+			<param name="apid">${id}</param>
+		</result>
+	</action>
 </package>
 </struts>    
 

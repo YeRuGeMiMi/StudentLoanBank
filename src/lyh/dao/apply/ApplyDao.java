@@ -158,4 +158,22 @@ public class ApplyDao extends BaseDao{
 		
 		return null;
 	}
+	
+	/**
+	 * 修改申请单状态
+	 * @param apply
+	 * @return
+	 */
+	public boolean updateStatus(Apply apply){
+		super.transaction = super.session.beginTransaction();
+		try {
+			super.session.update(apply);
+			super.transaction.commit();
+		} catch (Exception e) {
+			super.transaction.rollback();
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

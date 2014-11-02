@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://www.lyh.com" prefix="yl"%>
 <c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:set var="orderstatus" value="${requestScope.order_status}"></c:set>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -22,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="navbar" style="margin-bottom:0px">
 		<div class="navbar-inner" sytle="text-align: center;">
-			<h5>申请详情<button style="float:right;">返回</button></h5> 
+			<h5>申请详情<button style="float:right;" onclick="javascipt:history.back();">返回</button></h5> 
 		</div>
 	</div>
 	<c:set var="apply" value="${requestScope.apply}"></c:set>
@@ -64,10 +65,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td width="40%">${apply.money }</td>
     	</tr>
     </table>
+    <c:if test="${apply.status == 1}">
+    	<div align="center">
+    		<span><a class="btn btn-primary" href="apply?id=${apply.apid }&status=2">同意</a></span>
+    		<span><a class="btn" href="apply?id=${apply.apid }&status=4">拒绝</a></span>
+    	</div>
+    </c:if>
     <div style="text-align: center;">
     	<dl>
     		<dt>当前状态</dt>
-    		<dd>已提交</dd>
+    		<dd>${orderstatus[apply.status] }</dd>
     	</dl>
     </div>
 </body>

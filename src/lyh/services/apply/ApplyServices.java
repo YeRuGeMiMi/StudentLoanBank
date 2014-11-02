@@ -94,4 +94,19 @@ public class ApplyServices extends BaseServices{
 		Apply apply = dao.getApply(apid);
 		return apply;
 	}
+	
+	/**
+	 * 修改申请单
+	 * @param id
+	 * @param status
+	 * @return
+	 */
+	public boolean updateApplyStatus(int id,int status){
+		ApplyDao dao = new ApplyDao();
+		Apply apply = this.getApply(id);
+		apply.setStatus(status);
+		
+		boolean bool = dao.updateStatus(apply);
+		return bool;
+	}
 }
