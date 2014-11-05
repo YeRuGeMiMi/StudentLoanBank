@@ -183,10 +183,16 @@ public class StudentServices extends BaseServices{
 		}
 		
 		StudentDao dao = new StudentDao();
-		int totoal = dao.getCountSchool((Integer)keys.get("scid"), (String)keys.get("textword"));
-		
-		List<Student> students = dao.getBySchool((Integer)keys.get("scid"),start,size,(String)keys.get("textword"));
-		keys.put("total", totoal);
+		List<Student> students = null;
+		if(keys.get("scid") != null){
+			int totoal = dao.getCountSchool((Integer)keys.get("scid"), (String)keys.get("textword"));
+			students = dao.getBySchool((Integer)keys.get("scid"),start,size,(String)keys.get("textword"));
+			keys.put("total", totoal);
+		}else{
+			int totoal = dao.getCount((String)keys.get("textword"));
+			students = dao.getAll(start,size,(String)keys.get("textword"));
+			keys.put("total", totoal);
+		}
 		
 		return students;
 	}

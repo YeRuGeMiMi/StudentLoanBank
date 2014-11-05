@@ -5,6 +5,7 @@ import java.util.List;
 import lyh.base.BaseDao;
 import lyh.po.user.Member;
 
+import org.hibernate.CacheMode;
 import org.hibernate.Query;
 
 
@@ -70,6 +71,7 @@ public class MemberDao extends BaseDao {
 		String hql = "from Member as m where m.uid=:uid";
 		Query query = super.session.createQuery(hql);
 		query.setInteger("uid", uid);
+		query.setCacheMode(CacheMode.IGNORE);
 		
 		List<Member> list = query.list();
 		if(list.size() > 0){
@@ -79,5 +81,23 @@ public class MemberDao extends BaseDao {
 		return member;
 	}
 	
+	/**
+	 * 修改
+	 * @param member
+	 * @return
+	 */
+	public boolean update(Member member){
+		super.transaction = super.session.beginTransaction();
+		try {
+			super.session.save(member);
+			super.transaction.commit();
+		} catch (Exception e) {
+			super.transaction.rollback();
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 }
 

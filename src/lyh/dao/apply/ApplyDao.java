@@ -176,4 +176,90 @@ public class ApplyDao extends BaseDao{
 		}
 		return true;
 	}
+	
+	/**
+	 * 取得学校的申请单总数
+	 * @return
+	 */
+	public int countBnak(String textword,int bid){
+		StringBuilder hql = new StringBuilder("select count(*) from Apply as a");
+		Query query = null;
+		
+		//查询条件
+		if(!"".equals(textword) && textword != null){
+			hql.append(" where a.bank.bid=:bid");
+			hql.append(" AND (a.student.schoolcode like :schoolcode");
+			hql.append(" or a.student.name like :name");
+			hql.append(" or a.bank.bname like :bname)");
+			query = super.session.createQuery(hql.toString());
+			
+			//设置条件
+			query.setInteger("bid", bid);
+			query.setString("schoolcode", "%"+textword+"%");
+			query.setString("name", "%"+textword+"%");
+			query.setString("bname", "%"+textword+"%");
+		}else{
+			hql.append(" where a.bank.bid=:bid");
+			query = super.session.createQuery(hql.toString());
+			
+			//设置条件
+			query.setInteger("bid", bid);
+		}
+		
+		query.setCacheMode(CacheMode.IGNORE);
+		long count = (Long)query.uniqueResult();
+		
+		return (int)count;
+	}
+	/**
+	 * 取得银行的全部的申请单(按参数分页)
+	 * @param start
+	 * @param size
+	 * @param textword
+	 * @return
+	 */
+	public List<Apply> getBankAll(int start,int size,String textword,int bid){
+		StringBuilder hql = new StringBuilder("from Apply as a");
+		Query query = null;
+		
+		//查询条件
+		if(!"".equals(textword) && textword != null){
+			hql.append(" where a.bank.bid=:bid");
+			hql.append(" AND (a.student.schoolcode like :schoolcode");
+			hql.append(" or a.student.name like :name");
+			hql.append(" or a.bank.bname like :bname)");
+			hql.append(" order by a.apid DESC");
+			query = super.session.createQuery(hql.toString());
+			
+			//设置条件
+			query.setInteger("bid", bid);
+			query.setString("schoolcode", "%"+textword+"%");
+			query.setString("name", "%"+textword+"%");
+			query.setString("bname", "%"+textword+"%");
+			
+			//设置范围
+			query.setFirstResult(start);
+			query.setMaxResults(size);
+		}else{
+			hql.append(" where a.bank.bid=:bid");
+			hql.append(" order by a.apid DESC");
+			query = super.session.createQuery(hql.toString());
+			
+			//设置条件
+			query.setInteger("bid", bid);
+			
+			//设置范围
+			query.setFirstResult(start);
+			query.setMaxResults(size);
+		}
+		
+		query.setCacheMode(CacheMode.IGNORE);
+		List<Apply> list = query.list();
+		
+		if(list.size()>0){
+			return list;
+		}
+		
+		return null;
+	}
 }

@@ -164,4 +164,68 @@ public class StudentDao extends BaseDao{
 		return (int)count;
 		
 	}
+	
+	/**
+	 * 获取总数
+	 * @param textword
+	 * @return
+	 */
+	public int getCount(String textword){
+		StringBuilder hql = new StringBuilder("select count(*) from Student as stu");
+		Query query = null;
+		
+		//查询条件
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" and stu.name like :name");
+			hql.append(" or stu.schoolcode like :code");
+			query = super.session.createQuery(hql.toString());
+			query.setString("name", "%"+textword+"%");
+			query.setString("code", "%"+textword+"%");
+		}else{
+			query = super.session.createQuery(hql.toString());
+		}
+		
+		//查询结果
+		query.setCacheMode(CacheMode.IGNORE);
+		long count = (Long)query.uniqueResult();
+		
+		return (int)count;
+	}
+	
+	/**
+	 * 查询学生（分页查询）
+	 * @param scid
+	 * @param start
+	 * @param size
+	 * @param textword
+	 * @return
+	 */
+	public List<Student> getAll(int start,int size,String textword){
+		StringBuilder hql = new StringBuilder("from Student as stu");
+		
+		Query query = null;
+		
+		//查询条件
+		if(!"null".equals(textword)&&textword != null){
+			hql.append(" and stu.name like :name");
+			hql.append(" or stu.schoolcode like :code");
+			hql.append(" order by stu.stid DESC");
+			query = super.session.createQuery(hql.toString());
+			query.setString("name", "%"+textword+"%");
+			query.setString("code", "%"+textword+"%");
+		}else{
+			hql.append(" order by stu.stid DESC");
+			query = super.session.createQuery(hql.toString());
+		}
+		
+		//设置分页
+		query.setFirstResult(start);
+		query.setMaxResults(size);
+		
+		//查询结果
+		query.setCacheMode(CacheMode.IGNORE);
+		List<Student> list = query.list();
+		
+		return list;
+	}
 }

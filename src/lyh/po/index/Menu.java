@@ -18,6 +18,7 @@ public class Menu implements Serializable{
 	private int depth;
 	private int weight;
 	private int status;
+	private int isCheck;
 	
 	/**
 	 * 空构造
@@ -75,6 +76,14 @@ public class Menu implements Serializable{
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public int getIsCheck() {
+		return isCheck;
+	}
+
+	public void setIsCheck(int isCheck) {
+		this.isCheck = isCheck;
 	}
 	
 	

@@ -16,6 +16,7 @@ public class Member implements Serializable {
 	private String email;
 	private int type;
 	private int created;
+	private Roles roles;
 	
 	
 	/**
@@ -75,6 +76,14 @@ public class Member implements Serializable {
 
 	public void setCreated(int created) {
 		this.created = created;
+	}
+
+	public Roles getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Roles roles) {
+		this.roles = roles;
 	}
 
 	

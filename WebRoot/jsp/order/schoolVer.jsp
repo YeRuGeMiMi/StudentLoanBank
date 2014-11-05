@@ -45,7 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>邮箱</th>
 				<th>电话</th>
 				<th>申请银行</th>
-				<th>银行卡号</th>
 				<th>金额</th>
 				<th>创建时间</th>
 				<th>状态</th>
@@ -61,11 +60,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${apply.student.email }</td>
 					<td>${apply.student.phone }</td>
 					<td>${apply.bank.bname }</td>
-					<td>${apply.bankcode }</td>
 					<td>${apply.money }</td>
 					<td><yl:dateFomat name="${apply.created}"></yl:dateFomat></td>
 					<td>${orderstatus[apply.status] }</td>
-					<td></td>
+					<td><c:choose>
+						<c:when test="${apply.status == 1}">
+							<a href="orderItem?apid=${apply.apid }">审核</a>
+						</c:when>
+						<c:otherwise>
+							<a href="orderItem?apid=${apply.apid }">查看</a>
+						</c:otherwise>
+					</c:choose>
+					
+					</td>
 				</tr>
 			</c:forEach>
 			

@@ -32,6 +32,7 @@
 			<mapping resource="lyh/po/student/Student.hbm.xml"/>
 			<mapping resource="lyh/po/bank/Bank.hbm.xml"/>
 			<mapping resource="lyh/po/apply/Apply.hbm.xml"/>
+			<mapping resource="lyh/po/user/Roles.hbm.xml"/>
 	</session-factory>
 
 </hibernate-configuration>

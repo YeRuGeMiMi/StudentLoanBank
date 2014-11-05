@@ -15,18 +15,18 @@ public class IndexServices extends BaseServices{
 	 * 取得所有的菜单
 	 * @return
 	 */
-	public static Map<String,List<Menu>> getMunes(){
+	public static Map<String,List<Menu>> getMunes(List<Integer> power){
 		Map<String,List<Menu>> result = new HashMap<String, List<Menu>>();
 		
 		MenuDao dao = new MenuDao();
 		
-		List<Menu> roots = dao.getMenus(0);
+		List<Menu> roots = dao.getMenus(0,power);
 		result.put("0", roots);
 		for(Menu m:roots){
 			if(m.getHas_submenu() == 0){
 				continue;
 			}
-			List<Menu> list = dao.getMenus(m.getMlid());
+			List<Menu> list = dao.getMenus(m.getMlid(),power);
 			result.put(m.getTitle(), list);
 		}
 		return result;

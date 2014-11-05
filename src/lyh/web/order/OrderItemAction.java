@@ -5,6 +5,7 @@ import java.util.Map;
 
 import lyh.base.BaseAction;
 import lyh.po.apply.Apply;
+import lyh.po.user.Member;
 import lyh.services.apply.ApplyServices;
 
 public class OrderItemAction extends BaseAction{
@@ -23,6 +24,7 @@ public class OrderItemAction extends BaseAction{
 
 	@Override
 	public String execute() throws Exception {
+		Member member = (Member)super.session.get("member");
 		ApplyServices applySer = new ApplyServices();
 		Apply apply = applySer.getApply(apid);
 		
@@ -32,6 +34,7 @@ public class OrderItemAction extends BaseAction{
 		order_status.put(3, "通过");
 		order_status.put(4, "拒绝");
 		
+		super.request.put("type", member.getType());
 		super.request.put("order_status", order_status);
 		super.request.put("apply", apply);
 		return "In";

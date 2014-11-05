@@ -65,9 +65,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td width="40%">${apply.money }</td>
     	</tr>
     </table>
-    <c:if test="${apply.status == 1}">
+    <c:if test="${apply.status == 1 && requestScope.type == 2 }">
     	<div align="center">
     		<span><a class="btn btn-primary" href="apply?id=${apply.apid }&status=2">同意</a></span>
+    		<span><a class="btn" href="apply?id=${apply.apid }&status=4">拒绝</a></span>
+    	</div>
+    </c:if>
+    <c:if test="${apply.status == 2 && requestScope.type == 3 }">
+    	<div align="center">
+    		<span><a class="btn btn-primary" href="apply?id=${apply.apid }&status=3">同意</a></span>
     		<span><a class="btn" href="apply?id=${apply.apid }&status=4">拒绝</a></span>
     	</div>
     </c:if>

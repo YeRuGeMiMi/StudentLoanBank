@@ -109,4 +109,29 @@ public class ApplyServices extends BaseServices{
 		boolean bool = dao.updateStatus(apply);
 		return bool;
 	}
+	
+	/**
+	 * 取得银行的申请单列表
+	 * @return
+	 */
+	public List<Apply> getBankApplyList(Map<String,Object> keys){
+		int size=(Integer)keys.get("size");   //每页显示数
+		int p=(Integer)keys.get("p");
+		int start;
+		if(p==1 || p==0){
+			start = 0;
+		}else{
+			start = (p-1)*size;
+		}
+		
+		ApplyDao dao = new ApplyDao();
+		
+		//取得总数
+		int total = dao.countBnak((String)keys.get("textword"), (Integer)keys.get("bid"));
+		keys.put("total", total);
+		//取得申请单
+		List<Apply> list = dao.getBankAll(start, size, (String)keys.get("textword"), (Integer)keys.get("bid"));
+		
+		return list;
+	}
 }

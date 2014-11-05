@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="${root }/js/jquery-1.7.2.min.js"></script>
 <script src="${root }/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
-	#student_top{
+	#collage_top{
 		position: relative;
 		top:10px;
 		left: 20px;
@@ -28,39 +28,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>
 </head>
 <body>
-	<div id="student_top">
-		<form class="form-inline" action="info" method="POST">
+	<div id="collage_top">
+		<form class="form-inline" action="schoolVer" method="POST">
 			<label class="text-center">搜索</label>
 			<input type="text" class="input-small" placeholder="关键词" name="textword" value="${requestScope.keys.textword }">
 			<input type="submit" value="查询" class="btn btn-primary">	
 			
 		</form>
 	</div>
-	<div id="student_main">
+	<div id="collage_main">
 		<table class="table table-condensed">
 			<tr>
-				<th>校园卡号</th>
-				<th>姓名</th>
+				<td><input type="checkbox" id="id"/></td>
+				<th>申请编号</th>
+				<th>学生姓名</th>
 				<th>邮箱</th>
-				<th>学校</th>
-				<th>学院</th>
-				<th>专业</th>
-				<th>生日</th>
+				<th>电话</th>
+				<th>申请银行</th>
+				<th>金额</th>
+				<th>创建时间</th>
+				<th>状态</th>
+				<th>操作</th>
+				
 			</tr>
-			<c:forEach items="${requestScope.students}" var="student">
+			<c:set var="orderstatus" value="${requestScope.order_status}"></c:set>
+			<c:forEach items="${requestScope.applys}" var="apply">
 				<tr>
-					<td>${student.schoolcode }</td>
-					<td>${student.name }</td>
-					<td>${student.email }</td>
-					<td>${student.school.name }</td>
-					<td>${student.collage.coname }</td>
-					<td>${student.profession.proname }</td>
-					<td><yl:dateFomat name="${student.born}"></yl:dateFomat></td>
+					<td><input type="checkbox" id="id[${apply.apid }]"/></td>
+					<td><a href="orderItem?apid=${apply.apid }">${apply.apsn }</a></td>
+					<td>${apply.student.name }</td>
+					<td>${apply.student.email }</td>
+					<td>${apply.student.phone }</td>
+					<td>${apply.bank.bname }</td>
+					<td>${apply.money }</td>
+					<td><yl:dateFomat name="${apply.created}"></yl:dateFomat></td>
+					<td>${orderstatus[apply.status] }</td>
+					<td><c:choose>
+						<c:when test="${apply.status == 2}">
+							<a href="orderItem?apid=${apply.apid }">审核</a>
+						</c:when>
+						<c:otherwise>
+							<a href="orderItem?apid=${apply.apid }">查看</a>
+						</c:otherwise>
+					</c:choose>
+					</td>
 				</tr>
 			</c:forEach>
+			
 		</table>
 	</div>
 	${requestScope.pagepaper}
+	<script type="text/javascript">
+		$("#id").click(function(){
+			if($(this).attr("checked")){
+				$("input[id^='id[']").attr({'checked':true});
+			}else{
+				$("input[id^='id[']").attr({'checked':false});
+			}
+		});
+	</script>
 </body>
 
 

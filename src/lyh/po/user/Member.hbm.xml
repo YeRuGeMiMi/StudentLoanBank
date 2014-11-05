@@ -36,6 +36,8 @@
         <property name="created" type="java.lang.Integer">
         	<column name="CREATED" length="11" not-null="true" />
         </property>
-        
+        <many-to-one name="roles" class="lyh.po.user.Roles" fetch="select">
+			<column name="ROID" precision="11"  scale="0" not-null="true" />
+		</many-to-one>
     </class>
 </hibernate-mapping>

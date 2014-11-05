@@ -43,7 +43,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>对外邮箱</th>
 				<th>办公室电话</th>
 				<th>传真</th>
-				<th>操作</th>
 			</tr>
 			<c:forEach items="${requestScope.schools}" var="school">
 				<tr>
@@ -52,7 +51,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${school.email }</td>
 					<td>${school.officetel }</td>
 					<td>${school.fax }</td>
-					<td></td>
 				</tr>
 			</c:forEach>
 			

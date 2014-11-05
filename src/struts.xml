@@ -172,6 +172,31 @@
 			<param name="apid">${id}</param>
 		</result>
 	</action>
+	<action name="bankVer" class="lyh.web.order.BankVerAction">
+		<result name="In">
+			/jsp/order/bankVer.jsp
+		</result>
+	</action>
+</package>
+<package name="systemPackage" namespace="/System" extends="defaultPackage">
+	<action name="powerMag" class="lyh.web.system.PowerMagAction">
+		<result name="In">
+			/jsp/system/powerMag.jsp
+		</result>
+	</action>
+	<action name="setPower" class="lyh.web.system.SetPowerAction">
+		<result name="In">
+			/jsp/system/setPower.jsp
+		</result>
+	</action>
+	<action name="memberContorl" class="lyh.web.system.MemberContorlAction">
+		<result name="In">
+			/jsp/system/memberContorl.jsp
+		</result>
+		<result name="Su">
+			/jsp/system/memberMsg.jsp
+		</result>
+	</action>
 </package>
 </struts>    
 
