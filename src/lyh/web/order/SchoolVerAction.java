@@ -52,6 +52,10 @@ public class SchoolVerAction extends BaseAction{
 	@Override
 	public String execute() throws Exception {
 		Member member = (Member) super.session.get("member");
+		if(SchoolServices.getOneByUid(member.getUid()) == null){
+			super.request.put("message", "学校信息尚未完善，请到[学校管理]->[学校信息]填写学校信息");
+			return "fail";
+		}
 		String method = ServletActionContext.getRequest().getMethod();
 		
 		//取得学校信息

@@ -98,6 +98,10 @@ public class SelfAction extends BaseAction{
 			
 			if(!(i>0)){
 				return "fail";
+			}{
+				School school = SchoolServices.getOneByUid(member.getUid());
+				super.request.put("school", school);
+				return "sucess";
 			}
 		}
 		

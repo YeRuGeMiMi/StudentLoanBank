@@ -45,6 +45,7 @@ public class UserServices  extends BaseServices{
 		member.setEmail(keys.get("email"));
 		member.setType(Integer.parseInt(keys.get("type")));
 		member.setCreated((int)(System.currentTimeMillis()/1000));
+		member.setRoles(this.getRolesById(Integer.parseInt(keys.get("type"))));
 		
 		MemberDao dao = new MemberDao();
 		int i= dao.saveMember(member);
@@ -188,6 +189,17 @@ public class UserServices  extends BaseServices{
 		MemberDao dao = new MemberDao();
 		boolean bool = dao.update(member);
 		return bool;
+	}
+	
+	/**
+	 * 获取一个角色
+	 * @param roid
+	 * @return
+	 */
+	public Roles getRolesById(int roid){
+		RolesDao dao = new RolesDao();
+		Roles roles = dao.get(roid);
+		return roles;
 	}
 }
 

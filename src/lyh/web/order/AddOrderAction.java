@@ -59,6 +59,10 @@ public class AddOrderAction extends BaseAction{
 		//取得学生信息
 		StudentServices studentSer = new StudentServices();
 		Student student = studentSer.getByUid(member.getUid());
+		if(student == null){
+			super.request.put("message", "学生信息没有完善，请到[学生管理]->[学生信息]填写信息");
+			return "fail";
+		}
 		
 		//获取一个学生的申请单
 		Apply apply = applySer.getApply(student);

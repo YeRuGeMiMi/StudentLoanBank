@@ -48,6 +48,10 @@ public class BankVerAction extends BaseAction{
 		//取得学校信息
 		BankServices bankSer = new BankServices();
 		Bank bank = bankSer.getOneBank(member.getUid());
+		if(bank == null){
+			super.request.put("message", "银行信息尚未完善，请到[银行管理]->[银行信息]填写银行信息");
+			return "fail";
+		}
 		
 		//取得申请的services
 		ApplyServices applySer = new ApplyServices();

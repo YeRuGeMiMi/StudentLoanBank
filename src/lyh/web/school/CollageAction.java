@@ -44,6 +44,10 @@ public class CollageAction extends BaseAction{
 	@Override
 	public String execute() throws Exception {
 		Member member = (Member)super.session.get("member");
+		if(SchoolServices.getOneByUid(member.getUid()) == null){
+			super.request.put("message", "学校信息尚未完善，请到[学校管理]->[学校信息]填写学校信息");
+			return "fail";
+		}
 		Map<String,Object> keys = new HashMap<String,Object>();
 		keys.put("scid", SchoolServices.getOneByUid(member.getUid()).getScid());
 		keys.put("size", 6);

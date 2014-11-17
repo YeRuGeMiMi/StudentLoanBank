@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 	<div class="self_main">
-		<form action="School/self" method="POST">
+		<form action="self" method="POST">
 			
 			<table>
 				<tr>

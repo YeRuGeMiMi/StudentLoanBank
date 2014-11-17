@@ -66,6 +66,9 @@
 		<result name="In">
 			/jsp/student/info.jsp
 		</result>
+		<result name="fail">
+			/jsp/fail.jsp
+		</result>
 	</action>
 	<action name="self" class="lyh.web.studnet.SelfAction">
 		<result name="In">
@@ -84,6 +87,9 @@
 		<result name="sucess">
 			/jsp/user/login.jsp
 		</result>
+		<result name="fail">
+			/jsp/fail.jsp
+		</result>
 	</action>
 </package>
 
@@ -99,6 +105,9 @@
 	<action name="collage" class="lyh.web.school.CollageAction">
 		<result name="In">
 			/jsp/school/collage.jsp
+		</result>
+		<result name="fail">
+			/jsp/fail.jsp
 		</result>
 	</action>
 	<action name="addCollage" class="lyh.web.school.AddCollageAction">
@@ -155,10 +164,16 @@
 		<result name="Su">
 			/jsp/order/status.jsp
 		</result>
+		<result name="fail">
+			/jsp/fail.jsp
+		</result>
 	</action>
 	<action name="schoolVer" class="lyh.web.order.SchoolVerAction">
 		<result name="In">
 			/jsp/order/schoolVer.jsp
+		</result>
+		<result name="fail">
+			/jsp/fail.jsp
 		</result>
 	</action>
 	<action name="orderItem" class="lyh.web.order.OrderItemAction">
@@ -175,6 +190,9 @@
 	<action name="bankVer" class="lyh.web.order.BankVerAction">
 		<result name="In">
 			/jsp/order/bankVer.jsp
+		</result>
+		<result name="fail">
+			/jsp/fail.jsp
 		</result>
 	</action>
 </package>

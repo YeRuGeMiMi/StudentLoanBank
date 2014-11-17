@@ -45,7 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<th>专业代号</th>
 				<th>专业名称</th>
 				<th>学制</th>
-				<th>操作</th>
 			</tr>
 			<c:forEach items="${requestScope.collages}" var="col">
 				<c:forEach items="${col.professions}" var="pro" varStatus="proindex">
@@ -57,7 +56,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>${pro.procode }</td>
 						<td>${pro.proname }</td>
 						<td>${pro.year }</td>
-						<td></td>
 					</tr>
 					
 				</c:forEach>

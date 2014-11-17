@@ -128,6 +128,7 @@ public class RegAction extends BaseAction{
 			if(bool){
 				return "sucess";
 			}else{
+				super.request.put("message", "注册失败！");
 				return "fail";
 			}
 			
